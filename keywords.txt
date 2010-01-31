@@ -1,0 +1,62 @@
+#######################################
+# Syntax Coloring Map For i2c_adc_ads7828
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+i2c_adc_ads7828	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+BOUND	KEYWORD2
+
+analogRead	KEYWORD2
+getAverage	KEYWORD2
+getChannel	KEYWORD2
+getId	KEYWORD2
+getIndex	KEYWORD2
+getSample	KEYWORD2
+getScaleMin	KEYWORD2
+getScaleMax	KEYWORD2
+getTotal	KEYWORD2
+setScale	KEYWORD2
+
+#######################################
+# Instances (KEYWORD2)
+#######################################
+
+ai	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+i2c_adc_ads7828_ADR	LITERAL1
+i2c_adc_ads7828_ID0	LITERAL1
+i2c_adc_ads7828_ID1	LITERAL1
+i2c_adc_ads7828_ID2	LITERAL1
+i2c_adc_ads7828_ID3	LITERAL1
+i2c_adc_ads7828_MOV_AVG_BITS	LITERAL1
+i2c_adc_ads7828_SD	LITERAL1
+i2c_adc_ads7828_REF_ON	LITERAL1
+i2c_adc_ads7828_ADC_ON	LITERAL1
+i2c_adc_ads7828_CH0_1	LITERAL1
+i2c_adc_ads7828_CH2_3	LITERAL1
+i2c_adc_ads7828_CH4_5	LITERAL1
+i2c_adc_ads7828_CH6_7	LITERAL1
+i2c_adc_ads7828_CH1_0	LITERAL1
+i2c_adc_ads7828_CH3_2	LITERAL1
+i2c_adc_ads7828_CH5_4	LITERAL1
+i2c_adc_ads7828_CH7_6	LITERAL1
+i2c_adc_ads7828_CH0	LITERAL1
+i2c_adc_ads7828_CH2	LITERAL1
+i2c_adc_ads7828_CH4	LITERAL1
+i2c_adc_ads7828_CH6	LITERAL1
+i2c_adc_ads7828_CH1	LITERAL1
+i2c_adc_ads7828_CH3	LITERAL1
+i2c_adc_ads7828_CH5	LITERAL1
+i2c_adc_ads7828_CH7	LITERAL1
