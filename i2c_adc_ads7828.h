@@ -32,6 +32,9 @@
 // include types & constants of Wiring core API
 #include "WProgram.h"
 
+// include twi/i2c library
+#include <Wire.h>
+
 
 /* _____UTILITY MACROS_______________________________________________________ */
 // Macro to check if a value is within bounds (Min <= Value <= Max ?)
@@ -80,25 +83,57 @@
 class i2c_adc_ads7828
 {
   public:
+    // constructor
     i2c_adc_ads7828();
+    
+    // initialize twi/i2c interface
+    void begin();
+    
+    // read analog value from A/D converter
     uint16_t analogRead(uint8_t);
+    
+    // get mean value for device
     uint16_t getAverage(uint8_t);
-    uint8_t  getChannel(uint8_t);
-    uint8_t  getId(uint8_t);
-    uint8_t  getIndex(uint8_t);
+    
+    // get channel number of device (0..7)
+    uint8_t getChannel(uint8_t);
+    
+    // get ID number of device (0..3)
+    uint8_t getId(uint8_t);
+    
+    // get current index number for device
+    uint8_t getIndex(uint8_t);
+    
+    // get most-recent analog sample from device array
     uint16_t getSample(uint8_t);
+    
+    // get minimum scale for device
     uint16_t getScaleMin(uint8_t);
+    
+    // get maximum scale for device
     uint16_t getScaleMax(uint8_t);
+    
+    // get current running total for device
     uint16_t getTotal(uint8_t);
-    void     setScale(uint8_t, uint16_t, uint16_t);
+    
+    // set min/max scale values for device
+    void setScale(uint8_t, uint16_t, uint16_t);
+    
     
   private:
-    uint8_t  index[4][8];
-    uint16_t total[4][8];
-    uint16_t sample[4][8][1 << i2c_adc_ads7828_MOV_AVG_BITS];
-    uint16_t scaleMin[4][8];
-    uint16_t scaleMax[4][8];
+    // analog array index
+    uint8_t _u8Index[4][8];
+    
+    // analog array totals
+    uint16_t _u16Total[4][8];
+    
+    // analog array samples
+    uint16_t _u16Sample[4][8][1 << i2c_adc_ads7828_MOV_AVG_BITS];
+    
+    // analog array minimum scales
+    uint16_t _u16ScaleMin[4][8];
+    
+    // analog array maximum scales
+    uint16_t _u16ScaleMax[4][8];
 };
-
-extern i2c_adc_ads7828 ai;
 #endif

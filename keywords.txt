@@ -14,6 +14,8 @@ i2c_adc_ads7828	KEYWORD1
 
 BOUND	KEYWORD2
 
+begin	KEYWORD2
+
 analogRead	KEYWORD2
 getAverage	KEYWORD2
 getChannel	KEYWORD2
@@ -29,7 +31,6 @@ setScale	KEYWORD2
 # Instances (KEYWORD2)
 #######################################
 
-ai	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)

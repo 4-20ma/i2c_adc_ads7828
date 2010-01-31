@@ -24,10 +24,6 @@
 */
 
 
-/* _____STANDARD INCLUDES____________________________________________________ */
-#include "Wire.h"
-
-
 /* _____PROJECT INCLUDES_____________________________________________________ */
 #include "i2c_adc_ads7828.h"
 
@@ -42,154 +38,156 @@ i2c_adc_ads7828::i2c_adc_ads7828()
   {
     for (j = 0; j < 8; j++)
     {
-      index[i][j] = total[i][j] = scaleMin[i][j] = 0;
-      scaleMax[i][j] = 4095;
+      _u8Index[i][j] = _u16Total[i][j] = _u16ScaleMin[i][j] = 0;
+      _u16ScaleMax[i][j] = 4095;
       for (k = 0; k < (1 << i2c_adc_ads7828_MOV_AVG_BITS); k++)
       {
-        sample[i][j][k] = 0;
+        _u16Sample[i][j][k] = 0;
       }
     }
   }
-//  Wire.begin(); // do not call this from constructor function; screws up i2c bus communication byte order when using multiple i2c libraries
+}
+
+
+// initialize twi/i2c interface
+void i2c_adc_ads7828::begin()
+{
+  Wire.begin();
 }
 
 
 // read analog value from A/D converter
-uint16_t i2c_adc_ads7828::analogRead(uint8_t device)
+uint16_t i2c_adc_ads7828::analogRead(uint8_t u8Device)
 {
   uint8_t i, j;
   uint16_t r;
   
-  i = device & 0b11;
-  j = (device & 0b01110000) >> 4;
+  i = u8Device & 0b11;
+  j = (u8Device & 0b01110000) >> 4;
   
-  if (!BOUND(index[i][j], 0, (1 << i2c_adc_ads7828_MOV_AVG_BITS) - 1))
+  if (!BOUND(_u8Index[i][j], 0, (1 << i2c_adc_ads7828_MOV_AVG_BITS) - 1))
   {
-    index[i][j] = 0;
+    _u8Index[i][j] = 0;
   }
-  total[i][j] -= sample[i][j][index[i][j]];
+  _u16Total[i][j] -= _u16Sample[i][j][_u8Index[i][j]];
 
   Wire.beginTransmission(i2c_adc_ads7828_ADR | i);
-  Wire.send(device & 0b11111100);
+  Wire.send(u8Device & 0b11111100);
   
   if (!Wire.endTransmission())
   {
     Wire.requestFrom(i2c_adc_ads7828_ADR | i, 2);
-    sample[i][j][index[i][j]] = (Wire.receive() << 8) | Wire.receive();
+    _u16Sample[i][j][_u8Index[i][j]] = (Wire.receive() << 8) | Wire.receive();
   }
   else
   {
-    sample[i][j][index[i][j]] = 0;
+    _u16Sample[i][j][_u8Index[i][j]] = 0;
   }
 
-  total[i][j] += sample[i][j][index[i][j]];
-  index[i][j]++;
-  r = (total[i][j] >> i2c_adc_ads7828_MOV_AVG_BITS);
+  _u16Total[i][j] += _u16Sample[i][j][_u8Index[i][j]];
+  _u8Index[i][j]++;
+  r = (_u16Total[i][j] >> i2c_adc_ads7828_MOV_AVG_BITS);
   
-  return map(r, 0, 4095, scaleMin[i][j], scaleMax[i][j]);
+  return map(r, 0, 4095, _u16ScaleMin[i][j], _u16ScaleMax[i][j]);
 }
 
 
-// get average value for device
-uint16_t i2c_adc_ads7828::getAverage(uint8_t device)
+// get mean value for device
+uint16_t i2c_adc_ads7828::getAverage(uint8_t u8Device)
 {
   uint8_t i, j;
   uint16_t r;
   
-  i = device & 0b11;
-  j = (device & 0b01110000) >> 4;
-  r = (total[i][j] >> i2c_adc_ads7828_MOV_AVG_BITS);
+  i = u8Device & 0b11;
+  j = (u8Device & 0b01110000) >> 4;
+  r = (_u16Total[i][j] >> i2c_adc_ads7828_MOV_AVG_BITS);
   
-  return map(r, 0, 4095, scaleMin[i][j], scaleMax[i][j]);
+  return map(r, 0, 4095, _u16ScaleMin[i][j], _u16ScaleMax[i][j]);
 }
 
 
 // get channel number of device (0..7)
-uint8_t i2c_adc_ads7828::getChannel(uint8_t device)
+uint8_t i2c_adc_ads7828::getChannel(uint8_t u8Device)
 {
-  return (device & 0b01110000) >> 4;
+  return (u8Device & 0b01110000) >> 4;
 }
 
 
 // get ID number of device (0..3)
-uint8_t i2c_adc_ads7828::getId(uint8_t device)
+uint8_t i2c_adc_ads7828::getId(uint8_t u8Device)
 {
-  return device & 0b11;
+  return u8Device & 0b11;
 }
 
 
 // get current index number for device
-uint8_t i2c_adc_ads7828::getIndex(uint8_t device)
+uint8_t i2c_adc_ads7828::getIndex(uint8_t u8Device)
 {
   uint8_t i, j;
   
-  i = device & 0b11;
-  j = (device & 0b01110000) >> 4;
+  i = u8Device & 0b11;
+  j = (u8Device & 0b01110000) >> 4;
   
-  return (index[i][j] - 1);
+  return (_u8Index[i][j] - 1);
 }
 
 
 // get most-recent analog sample from device array
-uint16_t i2c_adc_ads7828::getSample(uint8_t device)
+uint16_t i2c_adc_ads7828::getSample(uint8_t u8Device)
 {
   uint8_t i, j;
   
-  i = device & 0b11;
-  j = (device & 0b01110000) >> 4;
+  i = u8Device & 0b11;
+  j = (u8Device & 0b01110000) >> 4;
   
-  return (sample[i][j][index[i][j] - 1]);
+  return (_u16Sample[i][j][_u8Index[i][j] - 1]);
 }
 
 
 // get minimum scale for device
-uint16_t i2c_adc_ads7828::getScaleMin(uint8_t device)
+uint16_t i2c_adc_ads7828::getScaleMin(uint8_t u8Device)
 {
   uint8_t i, j;
   
-  i = device & 0b11;
-  j = (device & 0b01110000) >> 4;
+  i = u8Device & 0b11;
+  j = (u8Device & 0b01110000) >> 4;
   
-  return scaleMin[i][j];
+  return _u16ScaleMin[i][j];
 }
 
 
 // get maximum scale for device
-uint16_t i2c_adc_ads7828::getScaleMax(uint8_t device)
+uint16_t i2c_adc_ads7828::getScaleMax(uint8_t u8Device)
 {
   uint8_t i, j;
   
-  i = device & 0b11;
-  j = (device & 0b01110000) >> 4;
+  i = u8Device & 0b11;
+  j = (u8Device & 0b01110000) >> 4;
   
-  return scaleMax[i][j];
+  return _u16ScaleMax[i][j];
 }
 
 
 // get current running total for device
-uint16_t i2c_adc_ads7828::getTotal(uint8_t device)
+uint16_t i2c_adc_ads7828::getTotal(uint8_t u8Device)
 {
   uint8_t i, j;
   
-  i = device & 0b11;
-  j = (device & 0b01110000) >> 4;
+  i = u8Device & 0b11;
+  j = (u8Device & 0b01110000) >> 4;
   
-  return total[i][j];
+  return _u16Total[i][j];
 }
 
 
 // set min/max scale values for device
-void i2c_adc_ads7828::setScale(uint8_t device, uint16_t newMin, uint16_t newMax)
+void i2c_adc_ads7828::setScale(uint8_t u8Device, uint16_t u16Min, uint16_t u16Max)
 {
   uint8_t i, j;
   
-  i = device & 0b11;
-  j = (device & 0b01110000) >> 4;
+  i = u8Device & 0b11;
+  j = (u8Device & 0b01110000) >> 4;
   
-  scaleMin[i][j] = newMin;
-  scaleMax[i][j] = newMax;
+  _u16ScaleMin[i][j] = u16Min;
+  _u16ScaleMax[i][j] = u16Max;
 }
-
-
-// instantiate object
-i2c_adc_ads7828 ai = i2c_adc_ads7828();
