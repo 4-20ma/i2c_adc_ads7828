@@ -29,28 +29,28 @@
 
 
 // instantiate i2c_adc_ads7828 object
-i2c_adc_ads7828 ai;
+i2c_adc_ads7828 adc;
 
 
 // examples of constants representing ID/channel combinations
 // this list is not all-inclusive; ID range 0..3, channel range 0..7
 // ID 0
-#define SENSOR00     (i2c_adc_ads7828_ID0 + i2c_adc_ads7828_CH0)
-#define SENSOR01     (i2c_adc_ads7828_ID0 + i2c_adc_ads7828_CH1)
-#define SENSOR02     (i2c_adc_ads7828_ID0 + i2c_adc_ads7828_CH2)
-#define SENSOR07     (i2c_adc_ads7828_ID0 + i2c_adc_ads7828_CH7)
+#define SENSOR00     (adc.ku8DeviceID0 + adc.ku8DeviceCH0)
+#define SENSOR01     (adc.ku8DeviceID0 + adc.ku8DeviceCH1)
+#define SENSOR02     (adc.ku8DeviceID0 + adc.ku8DeviceCH2)
+#define SENSOR07     (adc.ku8DeviceID0 + adc.ku8DeviceCH7)
 
 // ID 1
-#define SENSOR10     (i2c_adc_ads7828_ID1 + i2c_adc_ads7828_CH0)
-#define SENSOR11     (i2c_adc_ads7828_ID1 + i2c_adc_ads7828_CH1)
-#define SENSOR12     (i2c_adc_ads7828_ID1 + i2c_adc_ads7828_CH2)
-#define SENSOR17     (i2c_adc_ads7828_ID1 + i2c_adc_ads7828_CH7)
+#define SENSOR10     (adc.ku8DeviceID1 + adc.ku8DeviceCH0)
+#define SENSOR11     (adc.ku8DeviceID1 + adc.ku8DeviceCH1)
+#define SENSOR12     (adc.ku8DeviceID1 + adc.ku8DeviceCH2)
+#define SENSOR17     (adc.ku8DeviceID1 + adc.ku8DeviceCH7)
 
 // ID 2
-#define SENSOR20     (i2c_adc_ads7828_ID2 + i2c_adc_ads7828_CH0)
+#define SENSOR20     (adc.ku8DeviceID2 + adc.ku8DeviceCH0)
 
 // ID 3
-#define SENSOR30     (i2c_adc_ads7828_ID3 + i2c_adc_ads7828_CH0)
+#define SENSOR30     (adc.ku8DeviceID3 + adc.ku8DeviceCH0)
 
 
 void setup()
@@ -59,27 +59,27 @@ void setup()
   Serial.begin(19200);
   
   // initialize i2c interface
-  ai.begin();
+  adc.begin();
   
   // set scale of each channel; defaults to 0..4095 if not set explicitly
   // set scale of sensor id0, channel 2 to 0..20000
-  ai.setScale(SENSOR02, 0, 4095);
+  adc.SetScale(SENSOR02, 0, 4095);
   
   // set scale of sensor id0, channel 7 to 0..2500
-  ai.setScale(SENSOR07, 0, 2500);
+  adc.SetScale(SENSOR07, 0, 2500);
   
   // set scale of sensor id1, channel 0 to 0..100
-  ai.setScale(SENSOR10, 0, 100);
+  adc.SetScale(SENSOR10, 0, 100);
 }
 
 
 void loop()
 {
-  serialPrint(SENSOR02, ai.analogRead(SENSOR02));
-  serialPrint(SENSOR07, ai.analogRead(SENSOR07));
-  serialPrint(SENSOR10, ai.analogRead(SENSOR10));
-  serialPrint(SENSOR20, ai.analogRead(SENSOR20));
-  serialPrint(SENSOR30, ai.analogRead(SENSOR30));
+  serialPrint(SENSOR02, adc.AnalogRead(SENSOR02));
+  serialPrint(SENSOR07, adc.AnalogRead(SENSOR07));
+  serialPrint(SENSOR10, adc.AnalogRead(SENSOR10));
+  serialPrint(SENSOR20, adc.AnalogRead(SENSOR20));
+  serialPrint(SENSOR30, adc.AnalogRead(SENSOR30));
   Serial.print("\n- - - - - - - - - - - - - - - - - - - - ");
   delay(1000);
 }
@@ -88,15 +88,15 @@ void loop()
 void serialPrint(uint8_t u8Device, uint16_t u16Value)
 {
   Serial.print("\nID");
-  Serial.print(ai.getId(u8Device), HEX);
+  Serial.print(adc.GetId(u8Device), HEX);
   Serial.print(", CH");
-  Serial.print(ai.getChannel(u8Device), HEX);
+  Serial.print(adc.GetChannel(u8Device), HEX);
   Serial.print(" - I: ");
-  Serial.print(ai.getIndex(u8Device), DEC);
+  Serial.print(adc.GetIndex(u8Device), DEC);
   Serial.print(", S: ");
-  Serial.print(ai.getSample(u8Device), DEC);
+  Serial.print(adc.GetSample(u8Device), DEC);
   Serial.print(", T: ");
-  Serial.print(ai.getTotal(u8Device), DEC);
+  Serial.print(adc.GetTotal(u8Device), DEC);
   Serial.print(", A: ");
   Serial.print(u16Value, DEC);
 }
