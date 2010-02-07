@@ -28,8 +28,8 @@ Arduino library for TI ADS7828 I2C A/D converter.
 */
 
 
-#ifndef h
-#define h
+#ifndef i2c_adc_ads7828_h
+#define i2c_adc_ads7828_h
 
 
 /* _____STANDARD INCLUDES____________________________________________________ */
