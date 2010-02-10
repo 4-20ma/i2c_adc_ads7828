@@ -16,16 +16,16 @@ BOUND	KEYWORD2
 
 begin	KEYWORD2
 
-AnalogRead	KEYWORD2
-GetAverage	KEYWORD2
-GetChannel	KEYWORD2
-GetId	KEYWORD2
-GetIndex	KEYWORD2
-GetSample	KEYWORD2
-GetScaleMin	KEYWORD2
-GetScaleMax	KEYWORD2
-GetTotal	KEYWORD2
-SetScale	KEYWORD2
+analogRead	KEYWORD2
+getAverage	KEYWORD2
+getChannel	KEYWORD2
+getId	KEYWORD2
+getIndex	KEYWORD2
+getSample	KEYWORD2
+getScaleMin	KEYWORD2
+getScaleMax	KEYWORD2
+getTotal	KEYWORD2
+setScale	KEYWORD2
 
 #######################################
 # Instances (KEYWORD2)
@@ -40,6 +40,7 @@ ku8DeviceID0	LITERAL1
 ku8DeviceID1	LITERAL1
 ku8DeviceID2	LITERAL1
 ku8DeviceID3	LITERAL1
+
 ku8DeviceCH0_1	LITERAL1
 ku8DeviceCH1_0	LITERAL1
 ku8DeviceCH2_3	LITERAL1
@@ -48,6 +49,7 @@ ku8DeviceCH4_5	LITERAL1
 ku8DeviceCH5_4	LITERAL1
 ku8DeviceCH6_7	LITERAL1
 ku8DeviceCH7_6	LITERAL1
+
 ku8DeviceCH0	LITERAL1
 ku8DeviceCH1	LITERAL1
 ku8DeviceCH2	LITERAL1

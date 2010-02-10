@@ -69,17 +69,18 @@ class i2c_adc_ads7828
 {
   public:
     i2c_adc_ads7828();
+    
     void     begin();
-    uint16_t AnalogRead(uint8_t);
-    uint16_t GetAverage(uint8_t);
-    uint8_t  GetChannel(uint8_t);
-    uint8_t  GetId(uint8_t);
-    uint8_t  GetIndex(uint8_t);
-    uint16_t GetSample(uint8_t);
-    uint16_t GetScaleMin(uint8_t);
-    uint16_t GetScaleMax(uint8_t);
-    uint16_t GetTotal(uint8_t);
-    void     SetScale(uint8_t, uint16_t, uint16_t);
+    uint16_t analogRead(uint8_t);
+    uint16_t getAverage(uint8_t);
+    uint8_t  getChannel(uint8_t);
+    uint8_t  getId(uint8_t);
+    uint8_t  getIndex(uint8_t);
+    uint16_t getSample(uint8_t);
+    uint16_t getScaleMin(uint8_t);
+    uint16_t getScaleMax(uint8_t);
+    uint16_t getTotal(uint8_t);
+    void     setScale(uint8_t, uint16_t, uint16_t);
     
     /**
     I2C address offset for ADS7828 module (A1=0, A0=0).

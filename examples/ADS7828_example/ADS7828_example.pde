@@ -63,23 +63,23 @@ void setup()
   
   // set scale of each channel; defaults to 0..4095 if not set explicitly
   // set scale of sensor id0, channel 2 to 0..20000
-  adc.SetScale(SENSOR02, 0, 4095);
+  adc.setScale(SENSOR02, 0, 4095);
   
   // set scale of sensor id0, channel 7 to 0..2500
-  adc.SetScale(SENSOR07, 0, 2500);
+  adc.setScale(SENSOR07, 0, 2500);
   
   // set scale of sensor id1, channel 0 to 0..100
-  adc.SetScale(SENSOR10, 0, 100);
+  adc.setScale(SENSOR10, 0, 100);
 }
 
 
 void loop()
 {
-  serialPrint(SENSOR02, adc.AnalogRead(SENSOR02));
-  serialPrint(SENSOR07, adc.AnalogRead(SENSOR07));
-  serialPrint(SENSOR10, adc.AnalogRead(SENSOR10));
-  serialPrint(SENSOR20, adc.AnalogRead(SENSOR20));
-  serialPrint(SENSOR30, adc.AnalogRead(SENSOR30));
+  serialPrint(SENSOR02, adc.analogRead(SENSOR02));
+  serialPrint(SENSOR07, adc.analogRead(SENSOR07));
+  serialPrint(SENSOR10, adc.analogRead(SENSOR10));
+  serialPrint(SENSOR20, adc.analogRead(SENSOR20));
+  serialPrint(SENSOR30, adc.analogRead(SENSOR30));
   Serial.print("\n- - - - - - - - - - - - - - - - - - - - ");
   delay(1000);
 }
@@ -88,15 +88,15 @@ void loop()
 void serialPrint(uint8_t u8Device, uint16_t u16Value)
 {
   Serial.print("\nID");
-  Serial.print(adc.GetId(u8Device), HEX);
+  Serial.print(adc.getId(u8Device), HEX);
   Serial.print(", CH");
-  Serial.print(adc.GetChannel(u8Device), HEX);
+  Serial.print(adc.getChannel(u8Device), HEX);
   Serial.print(" - I: ");
-  Serial.print(adc.GetIndex(u8Device), DEC);
+  Serial.print(adc.getIndex(u8Device), DEC);
   Serial.print(", S: ");
-  Serial.print(adc.GetSample(u8Device), DEC);
+  Serial.print(adc.getSample(u8Device), DEC);
   Serial.print(", T: ");
-  Serial.print(adc.GetTotal(u8Device), DEC);
+  Serial.print(adc.getTotal(u8Device), DEC);
   Serial.print(", A: ");
   Serial.print(u16Value, DEC);
 }
