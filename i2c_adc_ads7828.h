@@ -66,7 +66,6 @@ applications requiring isolation. The ADS7828 is available in a TSSOP-16
 package. 
 @author Doc Walker
 @date 5 Feb 2010
-@todo implement PD0/PD1 bits (_kbReferenceOn, _kbADCOn)
 */
 class i2c_adc_ads7828
 {
@@ -104,6 +103,16 @@ class i2c_adc_ads7828
     I2C address offset for ADS7828 module (A1=1, A0=1).
     */
     static const uint8_t ku8DeviceID3                    = 0b11;
+    
+    /**
+    A/D converter on or off between conversions (Command byte PD0 bit).
+    */
+    static const uint8_t ku8ADCOn                        = bit(2);
+    
+    /**
+    Internal reference on or off between conversions (Command byte PD1 bit).
+    */
+    static const uint8_t ku8ReferenceOn                  = bit(3);
     
     /**
     Channel selection for differential inputs (CH0/1).
@@ -184,7 +193,7 @@ class i2c_adc_ads7828
     Channel selection for single-ended inputs (CH7).
     */
     static const uint8_t ku8DeviceCH7                    = (0b1111 << 4);
-
+    
   private:
     /**
     I2C base address for the ADS7828 module.
@@ -195,18 +204,6 @@ class i2c_adc_ads7828
     Number of samples to be averaged = 2^_ku8MovingAverageBits.
     */
     static const uint8_t _ku8MovingAverageBits           = 4;
-    
-    /**
-    Internal reference on or off between conversions (Command byte PD1 bit).
-    @note Not currently in use.
-    */
-    static const bool _kbReferenceOn                     = bit(3);
-    
-    /**
-    A/D converter on or off between conversions (Command byte PD0 bit).
-    @note Not currently in use.
-    */
-    static const bool _kbADCOn                           = bit(2);
     
     /**
     Analog array indices for each analog device.

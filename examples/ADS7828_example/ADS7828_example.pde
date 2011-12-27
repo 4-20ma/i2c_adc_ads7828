@@ -49,7 +49,8 @@ i2c_adc_ads7828 adc;
 #define SENSOR20     (adc.ku8DeviceID2 | adc.ku8DeviceCH0)
 
 // ID 3, CH0
-#define SENSOR30     (adc.ku8DeviceID3 | adc.ku8DeviceCH0)
+#define SENSOR30     (adc.ku8DeviceID3 | adc.ku8DeviceCH0 | \
+  adc.ku8ADCOn | adc.ku8ReferenceOn)
 
 
 void setup()
