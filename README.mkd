@@ -29,6 +29,7 @@ I can be contacted at dfwmountaineers at gmail.
 ##History##
 Date       | Rev  | Description
 :---------:|:----:|:-----------
+26-Dec-11  | v0.6 |Enable PD0, PD1 bits
 26-Dec-11  | v0.5 |Add support for Arduino 1.0
  9-Feb-10  | v0.4 |Modified capitalization of functions to match Arduino style where first letter is lower-case
 (unknown)  | v0.3 |
