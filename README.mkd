@@ -39,6 +39,7 @@ Date       | Rev  | Description
 
 ##Schematic##
 Below is a simplified schematic diagram. Refer to the datasheet for specific requirements.
+
 ```
                                Arduino
                               .--------------------.
