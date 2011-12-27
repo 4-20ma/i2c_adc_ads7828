@@ -22,8 +22,7 @@ Arduino library for TI ADS7828 I2C A/D converter.
   along with i2c_adc_ads7828.  If not, see <http://www.gnu.org/licenses/>.
   
   Written by Doc Walker (Rx)
-  Copyright © 2009, 2010 Doc Walker <dfwmountaineers at gmail dot com>
-  $Id$
+  Copyright Â© 2009-2011 Doc Walker <dfwmountaineers at gmail dot com>
   
 */
 
