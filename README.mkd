@@ -1,5 +1,5 @@
 ##Overview##
-This is an Arduino class library for the Texas Instruments ADS7828 12-bit, 8-channel I2C A/D converter. **Updated to support Arduino 1.0.**
+This is an Arduino class library for the Texas Instruments ADS7828 12-bit, 8-channel I^2^C A/D converter. **Updated to support Arduino 1.0.**
 
 ##Features##
 The following features have been implemented:
