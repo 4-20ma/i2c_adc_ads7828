@@ -86,12 +86,20 @@ uint16_t i2c_adc_ads7828::analogRead(uint8_t u8Device)
   _u16Total[i][j] -= _u16Sample[i][j][_u8Index[i][j]];
 
   Wire.beginTransmission(_ku8BaseAddress | i);
+#if defined(ARDUINO) && ARDUINO >= 100
+  Wire.write(u8Device & 0b11111100);
+#else
   Wire.send(u8Device & 0b11111100);
+#endif
   
   if (!Wire.endTransmission())
   {
     Wire.requestFrom(_ku8BaseAddress | i, 2);
+#if defined(ARDUINO) && ARDUINO >= 100
+    _u16Sample[i][j][_u8Index[i][j]] = word(Wire.read(), Wire.read());
+#else
     _u16Sample[i][j][_u8Index[i][j]] = word(Wire.receive(), Wire.receive());
+#endif
   }
   else
   {

@@ -33,7 +33,11 @@ Arduino library for TI ADS7828 I2C A/D converter.
 
 /* _____STANDARD INCLUDES____________________________________________________ */
 // include types & constants of Wiring core API
+#if defined(ARDUINO) && ARDUINO >= 100
+#include "Arduino.h"
+#else
 #include "WProgram.h"
+#endif
 
 // include twi/i2c library
 #include <Wire.h>
