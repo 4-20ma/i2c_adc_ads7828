@@ -141,7 +141,8 @@ Retrieve channel number of A/D converter.
 */
 uint8_t i2c_adc_ads7828::getChannel(uint8_t u8Device)
 {
-  return (u8Device & 0b01110000) >> 4;
+  return ((bitRead(u8Device, 5) << 2) | (bitRead(u8Device, 4) << 1) |
+    (bitRead(u8Device, 6)));
 }
 
 
