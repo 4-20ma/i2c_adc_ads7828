@@ -107,12 +107,12 @@ class i2c_adc_ads7828
     /**
     A/D converter on or off between conversions (Command byte PD0 bit).
     */
-    static const uint8_t ku8ADCOn                        = bit(2);
+    static const uint8_t ku8ADCOn                        = 0b0100;
     
     /**
     Internal reference on or off between conversions (Command byte PD1 bit).
     */
-    static const uint8_t ku8ReferenceOn                  = bit(3);
+    static const uint8_t ku8ReferenceOn                  = 0b1000;
     
     /**
     Channel selection for differential inputs (CH0/1).
