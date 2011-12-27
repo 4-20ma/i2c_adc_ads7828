@@ -33,23 +33,23 @@ i2c_adc_ads7828 adc;
 
 // examples of constants representing ID/channel combinations
 // this list is not all-inclusive; ID range 0..3, channel range 0..7
-// ID 0
-#define SENSOR00     (adc.ku8DeviceID0 + adc.ku8DeviceCH0)
-#define SENSOR01     (adc.ku8DeviceID0 + adc.ku8DeviceCH1)
-#define SENSOR02     (adc.ku8DeviceID0 + adc.ku8DeviceCH2)
-#define SENSOR07     (adc.ku8DeviceID0 + adc.ku8DeviceCH7)
+// ID 0, CH 0, 1, 2, 7
+#define SENSOR00     (adc.ku8DeviceID0 | adc.ku8DeviceCH0)
+#define SENSOR01     (adc.ku8DeviceID0 | adc.ku8DeviceCH1)
+#define SENSOR02     (adc.ku8DeviceID0 | adc.ku8DeviceCH2)
+#define SENSOR07     (adc.ku8DeviceID0 | adc.ku8DeviceCH7)
 
-// ID 1
-#define SENSOR10     (adc.ku8DeviceID1 + adc.ku8DeviceCH0)
-#define SENSOR11     (adc.ku8DeviceID1 + adc.ku8DeviceCH1)
-#define SENSOR12     (adc.ku8DeviceID1 + adc.ku8DeviceCH2)
-#define SENSOR17     (adc.ku8DeviceID1 + adc.ku8DeviceCH7)
+// ID 1, CH0, 1, 2, 7
+#define SENSOR10     (adc.ku8DeviceID1 | adc.ku8DeviceCH0)
+#define SENSOR11     (adc.ku8DeviceID1 | adc.ku8DeviceCH1)
+#define SENSOR12     (adc.ku8DeviceID1 | adc.ku8DeviceCH2)
+#define SENSOR17     (adc.ku8DeviceID1 | adc.ku8DeviceCH7)
 
-// ID 2
-#define SENSOR20     (adc.ku8DeviceID2 + adc.ku8DeviceCH0)
+// ID 2, CH0
+#define SENSOR20     (adc.ku8DeviceID2 | adc.ku8DeviceCH0)
 
-// ID 3
-#define SENSOR30     (adc.ku8DeviceID3 + adc.ku8DeviceCH0)
+// ID 3, CH0
+#define SENSOR30     (adc.ku8DeviceID3 | adc.ku8DeviceCH0)
 
 
 void setup()
