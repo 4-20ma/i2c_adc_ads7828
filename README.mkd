@@ -30,6 +30,10 @@ I can be contacted at dfwmountaineers at gmail.
 Date       | Rev  | Description
 :---------:|:----:|:-----------:
 26-Dec-11  | v0.5 |Add support for Arduino 1.0
+ 9-Feb-10  | v0.4 | Modified capitalization of functions to match Arduino style where first letter is lower-case
+(unknown)  | v0.3 |
+ 6-Feb-10  | v0.2 | Added documentation via Doxygen comments within the code; modified/cleaned up layout of code
+31-Jan-10  | v0.1 | Initial public release
 
 ##Example##
 The library contains a sketch that demonstrates use of the i2c\_adc\_ads7828 library. You can find these in the [examples](/2-718/i2c_adc_ads7828/tree/master/examples/) folder.
