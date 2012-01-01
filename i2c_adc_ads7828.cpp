@@ -18,245 +18,297 @@
   along with i2c_adc_ads7828.  If not, see <http://www.gnu.org/licenses/>.
   
   Written by Doc Walker (Rx)
-  Copyright © 2009-2011 Doc Walker <dfwmountaineers at gmail dot com>
+  Copyright © 2009-2012 Doc Walker <dfwmountaineers at gmail dot com>
   
 */
 
 
-/* _____PROJECT INCLUDES_____________________________________________________ */
+/* _____ PROJECT INCLUDES _________________________________________________ */
 #include "i2c_adc_ads7828.h"
 
 
-/* _____PUBLIC FUNCTIONS_____________________________________________________ */
-/**
-Constructor.
-
-Creates class object, sets up the A/D storage array.
-*/
-i2c_adc_ads7828::i2c_adc_ads7828()
+/* _____ ADS7828Channel CONSTRUCTORS ______________________________________ */
+ADS7828Channel::ADS7828Channel(uint8_t id, uint8_t options, uint16_t min,
+  uint16_t max)
 {
-  uint8_t i, j, k;
-  
-  for (i = 0; i < 4; i++)
+  this->_commandByte = (bitRead(options, 7) << 7) | (bitRead(id, 0) << 6) |
+    (bitRead(id, 2) << 5) | (bitRead(id, 1) << 4);
+  this->minScale = min;
+  this->maxScale = max;
+  reset();
+}
+
+
+/* _____ ADS7828Channel PUBLIC INSTANCE FUNCTIONS _________________________ */
+uint8_t ADS7828Channel::commandByte()
+{
+  return _commandByte;
+}
+
+
+ADS7828* ADS7828Channel::device()
+{
+  return _device;
+}
+
+
+uint8_t ADS7828Channel::id()
+{
+  return ((bitRead(_commandByte, 5) << 2) | (bitRead(_commandByte, 4) << 1) |
+    (bitRead(_commandByte, 6)));
+}
+
+
+// TODO: test this function
+uint8_t ADS7828Channel::index()
+{
+  return _index;
+}
+
+
+// TODO: test this function
+void ADS7828Channel::newSample(uint16_t sample)
+{
+  _index++;
+  if (_index >= (1 << _kMovingAverageBits)) _index = 0;
+  // {
+  //   _index = 0;
+  // }
+  _total -= _samples[_index];
+  _samples[_index] = sample;
+  _total += _samples[_index];
+}
+
+
+// TODO: test this function
+void ADS7828Channel::reset()
+{
+  _index = _total = 0;
+  for (uint8_t k = 0; k < (1 << _kMovingAverageBits); k++)
   {
-    for (j = 0; j < 8; j++)
-    {
-      _u8Index[i][j] = _u16Total[i][j] = _u16ScaleMin[i][j] = 0;
-      _u16ScaleMax[i][j] = 4095;
-      
-      for (k = 0; k < (1 << _ku8MovingAverageBits); k++)
-      {
-        _u16Sample[i][j][k] = 0;
-      }
-    }
+    _samples[k] = 0;
   }
 }
 
 
-/**
-Initialize class object.
+// TODO: test this function
+uint16_t ADS7828Channel::sample()
+{
+  return map(_samples[_index], kDefaultMinScale, kDefaultMaxScale, minScale,
+    maxScale);
+}
 
-Sets up the TWI/I2C interface.
-Call once class has been instantiated, typically within setup().
-*/
-void i2c_adc_ads7828::begin()
+
+// TODO: is this needed?
+uint8_t ADS7828Channel::start()
+{
+  return _device->start(id());
+}
+
+
+// TODO: test this function
+uint16_t ADS7828Channel::total()
+{
+  return _total;
+}
+
+
+// // TOOD: implement this function
+// // TODO: implement sample index inc, total -=, += as methods
+// uint8_t ADS7828Channel::update()
+// {
+//   uint8_t ret = start();
+//   if (0 == ret)
+//   {
+//     if (BOUND(_index, 0, (1 << _kMovingAverageBits) - 2))
+//     {
+//       _index++;
+//     }
+//     else
+//     {
+//       _index = 0;
+//     }
+//     _total -= _samples[_index];
+//     _samples[_index] = _device->read();
+//     _total += _samples[_index];
+//   }
+//   return ret;
+// }
+
+
+// TODO: test this function
+uint16_t ADS7828Channel::value()
+{
+  uint16_t r = (_total >> _kMovingAverageBits);
+  return map(r, kDefaultMinScale, kDefaultMaxScale, minScale, maxScale);
+}
+
+
+/* _____ ADS7828 PUBLIC CLASS FUNCTIONS ___________________________________ */
+void ADS7828::begin()
 {
   Wire.begin();
 }
 
 
-/**
-Perform A/D conversion and return mean value.
-
-@param u8Device ID/channel of A/D converter
-@return moving average of sample (0x0000..0xFFFF)
-*/
-uint16_t i2c_adc_ads7828::analogRead(uint8_t u8Device)
+uint16_t ADS7828::read(uint8_t address)
 {
-  uint8_t i, j;
-  uint16_t r;
-  
-  i = getId(u8Device);
-  j = getChannel(u8Device);
-  
-  if (!BOUND(_u8Index[i][j], 0, (1 << _ku8MovingAverageBits) - 1))
-  {
-    _u8Index[i][j] = 0;
-  }
-  _u16Total[i][j] -= _u16Sample[i][j][_u8Index[i][j]];
-
-  Wire.beginTransmission(_ku8BaseAddress | i);
+  Wire.requestFrom(_kDeviceBaseAddress | (address & 0b11), 2);
 #if defined(ARDUINO) && ARDUINO >= 100
-  Wire.write(u8Device & 0b11111100);
+  return word(Wire.read(), Wire.read());
 #else
-  Wire.send(u8Device & 0b11111100);
+  return word(Wire.receive(), Wire.receive());
 #endif
-  
-  if (!Wire.endTransmission())
-  {
-    Wire.requestFrom(_ku8BaseAddress | i, 2);
+}
+
+
+uint8_t ADS7828::start(uint8_t address, uint8_t command)
+{
+  Wire.beginTransmission(_kDeviceBaseAddress | (address & 0b11));
 #if defined(ARDUINO) && ARDUINO >= 100
-    _u16Sample[i][j][_u8Index[i][j]] = word(Wire.read(), Wire.read());
+  Wire.write((uint8_t) command);
 #else
-    _u16Sample[i][j][_u8Index[i][j]] = word(Wire.receive(), Wire.receive());
+  Wire.send((uint8_t) command);
 #endif
-  }
-  else
+  return Wire.endTransmission();
+}
+
+
+// TODO: test this function
+uint8_t ADS7828::update()
+{
+  uint8_t d, ch, count = 0;
+  for (d = 0; d < 4; d++)
   {
-    _u16Sample[i][j][_u8Index[i][j]] = 0;
+    if (_devices[d]) count += update(_devices[d]);
+    // for (ch = 0; ch < 8; ch++)
+    // {
+    //   if (_devices[d] && bitRead(_devices[d]->channelMask, ch))
+    //   {
+    //     if (0 == update(_devices[d], ch)) count++;
+    //   }
+    // }
   }
-
-  _u16Total[i][j] += _u16Sample[i][j][_u8Index[i][j]];
-  _u8Index[i][j]++;
-  r = (_u16Total[i][j] >> _ku8MovingAverageBits);
-  
-  return map(r, 0, 4095, _u16ScaleMin[i][j], _u16ScaleMax[i][j]);
+  return count;
 }
 
 
-/**
-Retrieve mean value of A/D conversion; no A/D conversion is performed.
-
-@param u8Device ID/channel of A/D converter
-@return moving average of sample (0x0000..0xFFFF)
-*/
-uint16_t i2c_adc_ads7828::getAverage(uint8_t u8Device)
+// TODO: test this function
+uint8_t ADS7828::update(ADS7828* device)
 {
-  uint8_t i, j;
-  uint16_t r;
-  
-  i = getId(u8Device);
-  j = getChannel(u8Device);
-  r = (_u16Total[i][j] >> _ku8MovingAverageBits);
-  
-  return map(r, 0, 4095, _u16ScaleMin[i][j], _u16ScaleMax[i][j]);
+  uint8_t ch, count = 0;
+  for (ch = 0; ch < 8; ch++)
+  {
+    if (bitRead(device->channelMask, ch))
+    {
+      if (0 == update(device, ch)) count++;
+    }
+  }
+  return count;
 }
 
 
-/**
-Retrieve channel number of A/D converter.
-
-@param u8Device ID/channel of A/D converter
-@return channel number of device ID/channel (0..7)
-*/
-uint8_t i2c_adc_ads7828::getChannel(uint8_t u8Device)
+// TODO: test this function
+uint8_t ADS7828::update(ADS7828* device, uint8_t ch)
 {
-  return ((bitRead(u8Device, 5) << 2) | (bitRead(u8Device, 4) << 1) |
-    (bitRead(u8Device, 6)));
+  uint8_t status = device->start(ch);
+  if (0 == status) device->channel(ch)->newSample(device->read());
+  return status;
+  // for (uint8_t ch = 0; ch < 8; ch++)
+  // {
+  //   if (bitRead(channelMask, ch))
+  //   {
+  //     update(ch);
+  //   }
+  // }
 }
 
 
-/**
-Retrieve ID number of A/D converter.
-
-@param u8Device ID/channel of A/D converter
-@return ID number of device ID/channel (0..3)
-*/
-uint8_t i2c_adc_ads7828::getId(uint8_t u8Device)
+/* _____ ADS7828 CONSTRUCTORS _____________________________________________ */
+ADS7828::ADS7828(uint8_t address)
 {
-  return u8Device & 0b11;
+  init(address, (kSingleEnded | kADCOn | kReferenceOn), kDefaultChannelMask,
+    kDefaultMinScale, kDefaultMaxScale);
 }
 
 
-/**
-Retrieve mean index number of A/D converter.
-
-@param u8Device ID/channel of A/D converter
-@return index number of device ID/channel (0..2^_ku8MovingAverageBits)
-*/
-uint8_t i2c_adc_ads7828::getIndex(uint8_t u8Device)
+ADS7828::ADS7828(uint8_t address, uint8_t options)
 {
-  uint8_t i, j;
-  
-  i = getId(u8Device);
-  j = getChannel(u8Device);
-  
-  return (_u8Index[i][j] - 1);
+  init(address, options, kDefaultChannelMask, kDefaultMinScale,
+    kDefaultMaxScale);
 }
 
 
-/**
-Retrieve most-recent sample from A/D converter.
-
-@param u8Device ID/channel of A/D converter
-@return most-recent analog sample without averaging (0x0000..0xFFFF)
-*/
-uint16_t i2c_adc_ads7828::getSample(uint8_t u8Device)
+ADS7828::ADS7828(uint8_t address, uint8_t options, uint8_t channelMask)
 {
-  uint8_t i, j;
-  
-  i = getId(u8Device);
-  j = getChannel(u8Device);
-  
-  return (_u16Sample[i][j][_u8Index[i][j] - 1]);
+  init(address, options, channelMask, kDefaultMinScale, kDefaultMaxScale);
 }
 
 
-/**
-Retrieve minimum scale of device ID/channel.
-
-@param u8Device ID/channel of A/D converter
-@return minimum scale of device ID/channel (0x0000..0xFFFF)
-*/
-uint16_t i2c_adc_ads7828::getScaleMin(uint8_t u8Device)
+ADS7828::ADS7828(uint8_t address, uint8_t options, uint8_t channelMask,
+  uint16_t min, uint16_t max)
 {
-  uint8_t i, j;
-  
-  i = getId(u8Device);
-  j = getChannel(u8Device);
-  
-  return _u16ScaleMin[i][j];
+  init(address, options, channelMask, min, max);
 }
 
 
-/**
-Retrieve maximum scale of device ID/channel.
-
-@param u8Device ID/channel of A/D converter
-@return maximum scale of device ID/channel (0x0000..0xFFFF)
-*/
-uint16_t i2c_adc_ads7828::getScaleMax(uint8_t u8Device)
+/* _____ ADS7828 PUBLIC INSTANCE FUNCTIONS ________________________________ */
+uint8_t ADS7828::address()
 {
-  uint8_t i, j;
-  
-  i = getId(u8Device);
-  j = getChannel(u8Device);
-  
-  return _u16ScaleMax[i][j];
+  return _address;
 }
 
 
-/**
-Retrieve current running total of device ID/channel.
-
-@param u8Device ID/channel of A/D converter
-@return running total of device ID/channel (0x0000..0xFFFF)
-*/
-uint16_t i2c_adc_ads7828::getTotal(uint8_t u8Device)
+ADS7828Channel* ADS7828::channel(uint8_t ch)
 {
-  uint8_t i, j;
-  
-  i = getId(u8Device);
-  j = getChannel(u8Device);
-  
-  return _u16Total[i][j];
+  return &_channels[ch & 0b111];
 }
 
 
-/**
-Set minimum/maximum scale values for device ID/channel.
-
-@param u8Device ID/channel of A/D converter
-@param u16Min minimum scale (0x0000..0xFFFF)
-@param u16Max maximum scale (0x0000..0xFFFF)
-*/
-void i2c_adc_ads7828::setScale(uint8_t u8Device, uint16_t u16Min, uint16_t u16Max)
+uint16_t ADS7828::read()
 {
-  uint8_t i, j;
-  
-  i = getId(u8Device);
-  j = getChannel(u8Device);
-  
-  _u16ScaleMin[i][j] = u16Min;
-  _u16ScaleMax[i][j] = u16Max;
+  return read(_address);
 }
+
+
+uint8_t ADS7828::start()
+{
+  return start(0);
+}
+
+
+uint8_t ADS7828::start(uint8_t ch)
+{
+  return start(_address, _commandByte | channel(ch)->commandByte());
+}
+
+
+uint8_t ADS7828::update(uint8_t ch)
+{
+  return update(this, ch);
+  // uint8_t status = start(ch);
+  // if (0 == status) channel(ch)->newSample(read());
+  // return status;
+}
+
+
+/* _____ ADS7828 PRIVATE INSTANCE FUNCTIONS _______________________________ */
+void ADS7828::init(uint8_t address, uint8_t options,
+  uint8_t channelMask, uint16_t min, uint16_t max)
+{
+  this->_address = address & 0b11;        // A1 A0 bits
+  this->_commandByte = options & 0b1100;  // PD1 PD0 bits
+  this->channelMask = channelMask;
+  for (uint8_t ch = 0; ch < 8; ch++)
+  {
+    // if (bitRead(channelMask, i)) {}
+    _channels[ch] = ADS7828Channel(ch, options, min, max);
+    _channels[ch]._device = this;
+  }
+  this->_devices[_address] = this;
+}
+
+
+/* _____ ADS7828 PRIVATE CLASS VARIABLES __________________________________ */
+ADS7828* ADS7828::_devices[] = {};
+
