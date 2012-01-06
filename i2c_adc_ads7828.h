@@ -40,6 +40,8 @@
 /// \version \verbinclude VERSION
 /// \date 5 Jan 2012
 /// \copyright GNU General Public License v3
+/// \par Source code (hosted at GitHub)
+///   https://github.com/2-718/i2c_adc_ads7828
 /// \par Programming Style Guidelines
 ///   http://geosoft.no/development/cppstyle.html
 /// \par Schematic:
