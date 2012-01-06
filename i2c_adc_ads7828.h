@@ -1,7 +1,5 @@
-/**
-@file
-Arduino library for TI ADS7828 I2C A/D converter.
-*/
+/// \file
+/// Arduino library for TI ADS7828 I2C A/D converter.
 /*
 
   i2c_adc_ads7828.h - Arduino library for TI ADS7828 I2C A/D converter
@@ -27,11 +25,31 @@ Arduino library for TI ADS7828 I2C A/D converter.
 */
 
 
+/// \mainpage Arduino library for TI ADS7828 I2C A/D converter.
+/// 
+/// The ADS7828 is a single-supply, low-power, 12-bit data acquisition 
+/// device that features a serial I2C interface and an 8-channel 
+/// multiplexer. The Analog-to-Digital (A/D) converter features a 
+/// sample-and-hold amplifier and internal, asynchronous clock. The 
+/// combination of an I2C serial, 2-wire interface and micropower 
+/// consumption makes the ADS7828 ideal for applications requiring the A/D 
+/// converter to be close to the input source in remote locations and for 
+/// applications requiring isolation. The ADS7828 is available in a TSSOP-16 
+/// package. 
+/// \author Doc Walker
+/// \version \verbinclude VERSION
+/// \date 5 Jan 2012
+/// \copyright GNU General Public License v3
+/// \par Programming Style Guidelines
+///   http://geosoft.no/development/cppstyle.html
+/// \par Schematic:
+///   \verbinclude SCHEMATIC
+
+
 #ifndef i2c_adc_ads7828_h
 #define i2c_adc_ads7828_h
 
-
-/* _____ STANDARD INCLUDES ________________________________________________ */
+// _________________________________________________________ STANDARD INCLUDES
 // include types & constants of Wiring core API
 #if defined(ARDUINO) && ARDUINO >= 100
 #include "Arduino.h"
@@ -40,107 +58,245 @@ Arduino library for TI ADS7828 I2C A/D converter.
 #endif
 
 
-/* _____ PROJECT INCLUDES _________________________________________________ */
+// __________________________________________________________ PROJECT INCLUDES
 // include twi/i2c library
 #include <Wire.h>
 
 
-/* _____ UTILITY MACROS ___________________________________________________ */
+// ____________________________________________________________ UTILITY MACROS
 
 
-/* _____ CONSTANTS ________________________________________________________ */
-static const uint8_t kDifferential        = 0 << 7; // SD == 0
-static const uint8_t kSingleEnded         = 1 << 7; // SD == 1
-static const uint8_t kReferenceOn         = 1 << 3; // PD1 == 1
-static const uint8_t kADCOn               = 1 << 2; // PD0 == 1
-static const uint8_t kDefaultChannelMask  = 0xFF;
-static const uint16_t kDefaultMinScale    = 0;
-static const uint16_t kDefaultMaxScale    = 0xFFF;
+// _________________________________________________________________ CONSTANTS
+/// Configure channels to use differential inputs (Command byte SD=0).
+/// Use either \ref DIFFERENTIAL or \ref SINGLE_ENDED in ADS7828
+///   constructor; default is \ref DIFFERENTIAL.
+/// \par Usage:
+/// \code
+/// ...
+/// // address 0, differential inputs, ref/ADC OFF between conversions
+/// ADS7828 adc0(0, DIFFERENTIAL | REFERENCE_OFF | ADC_OFF);
+/// ...
+/// \endcode
+/// \relates ADS7828
+static const uint8_t DIFFERENTIAL        = 0 << 7; // SD == 0
 
 
-/* _____ CLASS DEFINITIONS ________________________________________________ */
-// SD is channel-specific
-// PD1, PD0 are device-specific
+/// Configure channels to use single-ended inputs (Command byte SD=1).
+/// Use either \ref DIFFERENTIAL or \ref SINGLE_ENDED in ADS7828
+///   constructor; default is \ref DIFFERENTIAL.
+/// \par Usage:
+/// \code
+/// ...
+/// // address 1, single-ended inputs, ref/ADC OFF between conversions
+/// ADS7828 adc1(1, SINGLE_ENDED | REFERENCE_OFF | ADC_OFF);
+/// ...
+/// \endcode
+/// \relates ADS7828
+static const uint8_t SINGLE_ENDED         = 1 << 7; // SD == 1
+
+
+/// Configure channels to turn internal reference OFF between conversions (Command byte PD1=0).
+/// Use either \ref REFERENCE_OFF or \ref REFERENCE_ON in ADS7828
+///   constructor; default is \ref REFERENCE_OFF.
+/// \par Usage:
+/// \code
+/// ...
+/// // address 0, differential inputs, ref/ADC OFF between conversions
+/// ADS7828 adc0(0, DIFFERENTIAL | REFERENCE_OFF | ADC_OFF);
+/// ...
+/// \endcode
+/// \relates ADS7828
+static const uint8_t REFERENCE_OFF        = 0 << 3; // PD1 == 0
+
+
+/// Configure channels to turn internal reference ON between conversions (Command byte PD1=1).
+/// Use either \ref REFERENCE_OFF or \ref REFERENCE_ON in ADS7828
+///   constructor; default is \ref REFERENCE_OFF.
+/// \par Usage:
+/// \code
+/// ...
+/// // address 2, differential inputs, ref ON/ADC OFF between conversions
+/// ADS7828 adc2(2, DIFFERENTIAL | REFERENCE_ON | ADC_OFF);
+/// ...
+/// \endcode
+/// \relates ADS7828
+static const uint8_t REFERENCE_ON         = 1 << 3; // PD1 == 1
+
+
+/// Configure channels to turn A/D converter OFF between conversions (Command byte PD0=0).
+/// Use either \ref ADC_OFF or \ref ADC_ON in ADS7828
+///   constructor; default is \ref ADC_OFF.
+/// \par Usage:
+/// \code
+/// ...
+/// // address 0, differential inputs, ref/ADC OFF between conversions
+/// ADS7828 adc0(0, DIFFERENTIAL | REFERENCE_OFF | ADC_OFF);
+/// ...
+/// \endcode
+/// \relates ADS7828
+static const uint8_t ADC_OFF              = 0 << 2; // PD0 == 0
+
+
+/// Configure channels to turn A/D converter ON between conversions (Command byte PD0=1).
+/// Use either \ref ADC_OFF or \ref ADC_ON in ADS7828
+///   constructor; default is \ref ADC_OFF.
+/// \par Usage:
+/// \code
+/// ...
+/// // address 3 , differential inputs, ref OFF/ADC ON between conversions
+/// ADS7828 adc3(3, DIFFERENTIAL | REFERENCE_OFF | ADC_ON);
+/// ...
+/// \endcode
+/// \relates ADS7828
+static const uint8_t ADC_ON               = 1 << 2; // PD0 == 1
+
+
+/// Default channel mask used in ADS7828 constructor.
+/// \relates ADS7828
+static const uint8_t DEFAULT_CHANNEL_MASK  = 0xFF;
+
+
+/// Default scaling minimum value used in ADS7828 constructor.
+/// \relates ADS7828
+static const uint16_t DEFAULT_MIN_SCALE    = 0;
+
+
+/// Default scaling maximum value used in ADS7828 constructor.
+/// \relates ADS7828
+static const uint16_t DEFAULT_MAX_SCALE    = 0xFFF;
+
+
+// _________________________________________________________ CLASS DEFINITIONS
 class ADS7828;
 class ADS7828Channel
 {
   public:
-    // class functions
-    // (none)
-    
-    // constructors
+    // ............................................... public member functions
     ADS7828Channel() {};
-    ADS7828Channel(uint8_t, uint8_t, uint16_t, uint16_t);
+    ADS7828Channel(ADS7828* const, uint8_t, uint8_t, uint16_t, uint16_t);
+    uint8_t commandByte();
+    ADS7828* device();
+    uint8_t id();
+    uint8_t index();
+    void newSample(uint16_t);
+    void reset();
+    uint16_t sample();
+    uint8_t start();
+    uint16_t total();
+    uint8_t update();
+    uint16_t value();
     
-    // instance functions
-    uint8_t commandByte();        // returns channel command byte (0x0000..0xFFF0)
-    ADS7828* device();            // getter method for parent device pointer
-    uint8_t id();                 // returns channel ID number (0..7)
-    uint8_t index();              // getter method for array index
-    void newSample(uint16_t);     // setter method updates index, totalizer
-    void reset();                 // resets moving average index, totalizer
-    uint16_t sample();            // getter method for sample
-    uint8_t start();              // getter method calls parent device start() method
-    uint16_t total();             // getter method for totalizer
-    // uint8_t update();           // getter method TODO
-    uint16_t value();             // getter method for moving average value
+    // ........................................ static public member functions
     
-    // instance variables
-    ADS7828* _device;             // pointer to parent device
-    uint16_t maxScale;            // maximum scale (0x0000..0xFFFF, defaults to 0x0FFF)
-    uint16_t minScale;            // minimum scale (0x0000..0xFFFF, defaults to 0x0000)
+    // ..................................................... public attributes
+    /// Maximum value of moving average (defaults to 0x0FFF).
+    /// \par Usage:
+    /// \code
+    /// ...
+    /// ADS7828 device(0);
+    /// ADS7828Channel* temperature = device.channel(0);
+    /// uint16_t old = temperature->maxScale; // get current value and/or
+    /// temperature->maxScale = 100;          // set new value
+    /// ...
+    /// \endcode
+    uint16_t maxScale;
+    
+    /// Minimum value of moving average (defaults to 0x0000).
+    /// \par Usage:
+    /// \code
+    /// ...
+    /// ADS7828 device(0);
+    /// ADS7828Channel* temperature = device.channel(0);
+    /// uint16_t old = temperature->minScale; // get current value and/or
+    /// temperature->minScale = 0;            // set new value
+    /// ...
+    /// \endcode
+    uint16_t minScale;
+    
+    // .............................................. static public attributes
   
   private:
-    // instance functions
-    // (none)
+    // .............................................. private member functions
     
-    // instance variables
-    uint8_t _commandByte;         // command byte for channel (SD C2 C1 C0 bits only)
-    uint8_t _index;               // index of sample array (0..
-    uint16_t _samples[1 << 4];    // array of sampled values
-    uint16_t _total;              // running total of sample array
-    static const uint8_t _kMovingAverageBits = 4;
+    // ....................................... static private member functions
+    
+    // .................................................... private attributes
+    /// Command byte for channel object (SD C2 C1 C0 bits only).
+    uint8_t commandByte_;
+    
+    /// Pointer to parent device object.
+    ADS7828* device_;
+    
+    /// Index position within moving average array. 
+    uint8_t index_;
+    
+    /// Array of (unscaled) sample values.
+    uint16_t samples_[1 << 4];
+    
+    /// (Unscaled) running total of moving average array elements.
+    uint16_t total_;
+    
+    // ............................................. static private attributes
+    /// Quantity of samples to be averaged = 2^MOVING_AVERAGE_BITS_.
+    static const uint8_t MOVING_AVERAGE_BITS_ = 4;
 };
 
 
 class ADS7828
 {
   public:
-    // class functions
-    static void begin();
-    static uint16_t read(uint8_t);
-    static uint8_t start(uint8_t, uint8_t);
-    static uint8_t update(); // all devices, all unmasked channels
-    static uint8_t update(ADS7828*); // single device, all unmasked channels
-    static uint8_t update(ADS7828*, uint8_t); // single device, single channel
-    
-    // constructors
+    // ............................................... public member functions
     ADS7828(uint8_t);
     ADS7828(uint8_t, uint8_t);
     ADS7828(uint8_t, uint8_t, uint8_t);
     ADS7828(uint8_t, uint8_t, uint8_t, uint16_t, uint16_t);
-    
-    // instance functions
     uint8_t address();
-    ADS7828Channel* channel(uint8_t);       // channel getter method
-    uint16_t read();
+    ADS7828Channel* channel(uint8_t);
+    uint8_t commandByte();
     uint8_t start();
     uint8_t start(uint8_t);
+    uint8_t update(); // single device, all unmasked channel
     uint8_t update(uint8_t); // single device, single channel
     
-    // instance variables
+    // ........................................ static public member functions
+    static void begin();
+    static ADS7828* device(uint8_t);
+    static uint8_t updateAll(); // all devices, all unmasked channels
+    
+    // ..................................................... public attributes
+    /// Each bit position containing a 1 represents a channel that is to be
+    /// read via update() / updateAll().
     uint8_t channelMask;                    // mask of active channels
+    
+    // .............................................. static public attributes
   
   private:
-    // instance functions
+    // .............................................. private member functions
     void init(uint8_t, uint8_t, uint8_t, uint16_t, uint16_t);
+    uint16_t read();
     
-    // instance variables
-    uint8_t _address;                       // address of device A1 A0
-    ADS7828Channel _channels[8];            // array of channel objects
-    uint8_t _channelIndex;                  // index of current channel
-    uint8_t _commandByte;                   // PD1 PD0 bits only
-    static ADS7828* _devices[4];
-    static const uint8_t _kDeviceBaseAddress = 0x48;
+    // ....................................... static private member functions
+    static uint16_t read(uint8_t);
+    static uint8_t start(uint8_t, uint8_t);
+    static uint8_t update(ADS7828*); // single device, all unmasked channels
+    static uint8_t update(ADS7828*, uint8_t); // single device, single channel
+    
+    // .................................................... private attributes
+    /// Device address as defined by pins A1, A0
+    uint8_t address_;
+    
+    /// Array of channel objects.
+    ADS7828Channel channels_[8];
+    
+    /// Command byte for device object (PD1 PD0 bits only).
+    uint8_t commandByte_;
+    
+    // ............................................. static private attributes
+    /// Array of pointers to registered device objects.
+    static ADS7828* devices_[4];
+    
+    /// Factory pre-set slave address.
+    static const uint8_t BASE_ADDRESS_ = 0x48;
 };
 #endif
+/// \example examples/ADS7828_example/ADS7828_example.pde
