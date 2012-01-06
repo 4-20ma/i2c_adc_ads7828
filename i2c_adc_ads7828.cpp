@@ -75,8 +75,23 @@ ADS7828* ADS7828Channel::device()
 }
 
 
-/// Return ID number of channel object.
+/// Return ID number of channel object (+IN connection).
+/// Single-ended inputs use COM as -IN; Differential inputs are as follows:
+/// \arg 0 indicates CH0 as +IN, CH1 as -IN
+/// \arg 1 indicates CH1 as +IN, CH0 as -IN
+/// \arg 2 indicates CH2 as +IN, CH3 as -IN
+/// \arg ...
+/// \arg 7 indicates CH7 as +IN, CH6 as -IN
+/// 
 /// \return id (0..7)
+/// \retval 0 command byte C2 C1 C0 = 000
+/// \retval 1 command byte C2 C1 C0 = 100
+/// \retval 2 command byte C2 C1 C0 = 001
+/// \retval 3 command byte C2 C1 C0 = 101
+/// \retval 4 command byte C2 C1 C0 = 010
+/// \retval 5 command byte C2 C1 C0 = 110
+/// \retval 6 command byte C2 C1 C0 = 011
+/// \retval 7 command byte C2 C1 C0 = 111
 /// \par Usage:
 /// \code
 /// ...

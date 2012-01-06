@@ -99,7 +99,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_a_d_s7828.html">ADS7828</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s7828_channel.html#a23c4b3feb7906925490006c89a0bd6b8">device</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Return pointer to parent device object.  <a href="#a23c4b3feb7906925490006c89a0bd6b8"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s7828_channel.html#ae736e4230d1c726c74f08aa91d754032">id</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Return ID number of channel object.  <a href="#ae736e4230d1c726c74f08aa91d754032"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Return ID number of channel object (+IN connection).  <a href="#ae736e4230d1c726c74f08aa91d754032"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s7828_channel.html#af6de63f5707915f0d0c2c4ac3e1560d7">index</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Return index position within moving average array.  <a href="#af6de63f5707915f0d0c2c4ac3e1560d7"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s7828_channel.html#ab5701f667bfdb461f304805ae760d3c6">newSample</a> (uint16_t)</td></tr>
@@ -302,12 +302,33 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Return ID number of channel object. </p>
+<p>Return ID number of channel object (+IN connection). </p>
+<p>Single-ended inputs use COM as -IN; Differential inputs are as follows: </p>
+<ul>
+<li>0 indicates CH0 as +IN, CH1 as -IN </li>
+<li>1 indicates CH1 as +IN, CH0 as -IN </li>
+<li>2 indicates CH2 as +IN, CH3 as -IN </li>
+<li>... </li>
+<li>7 indicates CH7 as +IN, CH6 as -IN</li>
+</ul>
 <dl class="return"><dt><b>Returns:</b></dt><dd>id (0..7) </dd></dl>
+<dl class="retval"><dt><b>Return values:</b></dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>command byte C2 C1 C0 = 000 </td></tr>
+    <tr><td class="paramname">1</td><td>command byte C2 C1 C0 = 100 </td></tr>
+    <tr><td class="paramname">2</td><td>command byte C2 C1 C0 = 001 </td></tr>
+    <tr><td class="paramname">3</td><td>command byte C2 C1 C0 = 101 </td></tr>
+    <tr><td class="paramname">4</td><td>command byte C2 C1 C0 = 010 </td></tr>
+    <tr><td class="paramname">5</td><td>command byte C2 C1 C0 = 110 </td></tr>
+    <tr><td class="paramname">6</td><td>command byte C2 C1 C0 = 011 </td></tr>
+    <tr><td class="paramname">7</td><td>command byte C2 C1 C0 = 111 </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="user"><dt><b>Usage:</b></dt><dd><div class="fragment"><pre class="fragment"> ...
  <a class="code" href="class_a_d_s7828.html">ADS7828</a> adc(0);
  <a class="code" href="class_a_d_s7828_channel.html">ADS7828Channel</a>* temperature = adc.<a class="code" href="class_a_d_s7828.html#a35fce229052d9e45b228e6d099658dcf" title="Return pointer to channel object.">channel</a>(0);
- uint8_t channelId = temperature-&gt;<a class="code" href="class_a_d_s7828_channel.html#ae736e4230d1c726c74f08aa91d754032" title="Return ID number of channel object.">id</a>();
+ uint8_t channelId = temperature-&gt;<a class="code" href="class_a_d_s7828_channel.html#ae736e4230d1c726c74f08aa91d754032" title="Return ID number of channel object (+IN connection).">id</a>();
  ...
 </pre></div> </dd></dl>
 <dl><dt><b>Examples: </b></dt><dd><a class="el" href="examples_2two_devices_2two_devices_8pde-example.html#a10">examples/two_devices/two_devices.pde</a>.</dd>
