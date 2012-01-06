@@ -98,7 +98,7 @@ void setup()
   ADS7828::begin();
   
   // adjust scaling on an individual channel basis
-  ambientTemp->minScale = -40;
+  ambientTemp->minScale = 0;
   ambientTemp->maxScale = 150;
   
   waterTemp->minScale = 0;
