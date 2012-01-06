@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_a_d_s7828.html#abfffd6e7cc6f187a364254813dd25502" title="Initiate communication with device." alt="" coords="237,5,357,35"/>
+<area shape="rect" id="node5" href="$class_a_d_s7828.html#a35fce229052d9e45b228e6d099658dcf" title="Return pointer to channel object." alt="" coords="228,59,367,88"/>
+<area shape="rect" id="node7" href="$class_a_d_s7828_channel.html#ab5701f667bfdb461f304805ae760d3c6" title="Add (unscaled) sample value to moving average array, update totalizer." alt="" coords="189,112,405,141"/>
+<area shape="rect" id="node11" href="$class_a_d_s7828.html#afd95a6cc5fa375043f713a5c92e15453" title="Request and receive data from most&#45;recent A/D conversion from device." alt="" coords="239,165,356,195"/>
+<area shape="rect" id="node9" href="$class_a_d_s7828_channel.html#af4ff68784f62525fbee8dd9d0584e2c1" title="Return most&#45;recent (unscaled) sample value from moving average array." alt="" coords="453,112,643,141"/>
+</map>
