@@ -7,57 +7,48 @@
 #######################################
 
 i2c_adc_ads7828	KEYWORD1
+ADS7828	KEYWORD1
+ADS7828Channel	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
 
-BOUND	KEYWORD2
-
+address	KEYWORD2
 begin	KEYWORD2
+channel	KEYWORD2
+commandByte	KEYWORD2
+device	KEYWORD2
+id	KEYWORD2
+index	KEYWORD2
+newSample	KEYWORD2
+reset	KEYWORD2
+sample	KEYWORD2
+start	KEYWORD2
+total	KEYWORD2
+update	KEYWORD2
+updateAll	KEYWORD2
+value	KEYWORD2
 
-analogRead	KEYWORD2
-getAverage	KEYWORD2
-getChannel	KEYWORD2
-getId	KEYWORD2
-getIndex	KEYWORD2
-getSample	KEYWORD2
-getScaleMin	KEYWORD2
-getScaleMax	KEYWORD2
-getTotal	KEYWORD2
-setScale	KEYWORD2
+maxScale	KEYWORD2
+minScale	KEYWORD2
+
 
 #######################################
 # Instances (KEYWORD2)
 #######################################
 
-
 #######################################
 # Constants (LITERAL1)
 #######################################
 
-ku8DeviceID0	LITERAL1
-ku8DeviceID1	LITERAL1
-ku8DeviceID2	LITERAL1
-ku8DeviceID3	LITERAL1
+DIFFERENTIAL	LITERAL1
+SINGLE_ENDED	LITERAL1
+REFERENCE_OFF	LITERAL1
+REFERENCE_ON	LITERAL1
+ADC_OFF	LITERAL1
+ADC_ON	LITERAL1
 
-ku8ADCOn	LITERAL1
-ku8ReferenceOn	LITERAL1
-
-ku8DeviceCH0_1	LITERAL1
-ku8DeviceCH1_0	LITERAL1
-ku8DeviceCH2_3	LITERAL1
-ku8DeviceCH3_2	LITERAL1
-ku8DeviceCH4_5	LITERAL1
-ku8DeviceCH5_4	LITERAL1
-ku8DeviceCH6_7	LITERAL1
-ku8DeviceCH7_6	LITERAL1
-
-ku8DeviceCH0	LITERAL1
-ku8DeviceCH1	LITERAL1
-ku8DeviceCH2	LITERAL1
-ku8DeviceCH3	LITERAL1
-ku8DeviceCH4	LITERAL1
-ku8DeviceCH5	LITERAL1
-ku8DeviceCH6	LITERAL1
-ku8DeviceCH7	LITERAL1
+DEFAULT_CHANNEL_MASK	LITERAL1
+DEFAULT_MIN_SCALE	LITERAL1
+DEFAULT_MAX_SCALE	LITERAL1
