@@ -30,6 +30,7 @@ I can be contacted at dfwmountaineers at gmail.
 ##History##
 Date       | Rev  | Description
 :---------:|:----:|:-----------
+ 7-Jan-12  | [v1.0.1](/2-718/i2c_adc_ads7828/tree/v1.0.1) |Fix array declaration, one_device serial output, keywords
  6-Jan-12  | [v1.0](/2-718/i2c_adc_ads7828/tree/v1.0) |Complete rewrite to use device & channel objects
 27-Dec-11  | [v0.7](/2-718/i2c_adc_ads7828/tree/v0.7) |Fix getChannel, add schematic
 26-Dec-11  | [v0.6](/2-718/i2c_adc_ads7828/tree/v0.6) |Enable PD0, PD1 bits
@@ -120,11 +121,11 @@ void loop()
   // output moving average values to console
   Serial.print("\n Ambient: ");
   Serial.print(ambientTemp->value(), DEC);
-  Serial.print("\n Ambient: ");
+  Serial.print("\n Water temp: ");
   Serial.print(waterTemp->value(), DEC);
-  Serial.print("\n Ambient: ");
+  Serial.print("\n Filter pressure: ");
   Serial.print(filterPressure->value(), DEC);
-  Serial.print("\n Ambient: ");
+  Serial.print("\n Water level: ");
   Serial.print(waterLevel->value(), DEC);
   Serial.print("\n- - - - - - - - - - - - - - - - - - - - \n");
   
