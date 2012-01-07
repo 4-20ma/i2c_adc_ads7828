@@ -233,13 +233,15 @@ class ADS7828Channel
     uint8_t index_;
     
     /// Array of (unscaled) sample values.
-    uint16_t samples_[1 << MOVING_AVERAGE_BITS_];
+    /// \note Bit shift must match \ref MOVING_AVERAGE_BITS_.
+    uint16_t samples_[1 << 4];
     
     /// (Unscaled) running total of moving average array elements.
     uint16_t total_;
     
     // ............................................. static private attributes
     /// Quantity of samples to be averaged = 2^MOVING_AVERAGE_BITS_.
+    /// \note MOVING_AVERAGE_BITS_ must match \ref samples_ bit shift.
     static const uint8_t MOVING_AVERAGE_BITS_ = 4;
 };
 
