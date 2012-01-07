@@ -44,11 +44,11 @@ void loop()
   // output moving average values to console
   Serial.print("\n Ambient: ");
   Serial.print(ambientTemp->value(), DEC);
-  Serial.print("\n Ambient: ");
+  Serial.print("\n Water temp: ");
   Serial.print(waterTemp->value(), DEC);
-  Serial.print("\n Ambient: ");
+  Serial.print("\n Filter pressure: ");
   Serial.print(filterPressure->value(), DEC);
-  Serial.print("\n Ambient: ");
+  Serial.print("\n Water level: ");
   Serial.print(waterLevel->value(), DEC);
   Serial.print("\n- - - - - - - - - - - - - - - - - - - - \n");
   
