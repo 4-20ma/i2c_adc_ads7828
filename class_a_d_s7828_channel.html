@@ -133,8 +133,8 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a34219ddd59e982d32562f094292b5274"></a><!-- doxytag: member="ADS7828Channel::index_" ref="a34219ddd59e982d32562f094292b5274" args="" -->
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s7828_channel.html#a34219ddd59e982d32562f094292b5274">index_</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Index position within moving average array. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a325a0244f06bcee456c98133019a8484"></a><!-- doxytag: member="ADS7828Channel::samples_" ref="a325a0244f06bcee456c98133019a8484" args="[1&lt;&lt; 4]" -->
-uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s7828_channel.html#a325a0244f06bcee456c98133019a8484">samples_</a> [1&lt;&lt; 4]</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad018a1b5cc00d10cd75d1c2dba897760"></a><!-- doxytag: member="ADS7828Channel::samples_" ref="ad018a1b5cc00d10cd75d1c2dba897760" args="[1&lt;&lt; MOVING_AVERAGE_BITS_]" -->
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s7828_channel.html#ad018a1b5cc00d10cd75d1c2dba897760">samples_</a> [1&lt;&lt; <a class="el" href="class_a_d_s7828_channel.html#ac97c771263d85e4bb2f75ae9c27d624f">MOVING_AVERAGE_BITS_</a>]</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Array of (unscaled) sample values. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad59c1575c352dbbf4f82ed64f39be03e"></a><!-- doxytag: member="ADS7828Channel::total_" ref="ad59c1575c352dbbf4f82ed64f39be03e" args="" -->
 uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_d_s7828_channel.html#ad59c1575c352dbbf4f82ed64f39be03e">total_</a></td></tr>
@@ -394,9 +394,9 @@ Here is the caller graph for this function:</div>
 <div class="fragment"><pre class="fragment">{
   this-&gt;<a class="code" href="class_a_d_s7828_channel.html#a34219ddd59e982d32562f094292b5274" title="Index position within moving average array.">index_</a>++;
   <span class="keywordflow">if</span> (<a class="code" href="class_a_d_s7828_channel.html#a34219ddd59e982d32562f094292b5274" title="Index position within moving average array.">index_</a> &gt;= (1 &lt;&lt; <a class="code" href="class_a_d_s7828_channel.html#ac97c771263d85e4bb2f75ae9c27d624f" title="Quantity of samples to be averaged = 2^MOVING_AVERAGE_BITS_.">MOVING_AVERAGE_BITS_</a>)) this-&gt;<a class="code" href="class_a_d_s7828_channel.html#a34219ddd59e982d32562f094292b5274" title="Index position within moving average array.">index_</a> = 0;
-  this-&gt;<a class="code" href="class_a_d_s7828_channel.html#ad59c1575c352dbbf4f82ed64f39be03e" title="(Unscaled) running total of moving average array elements.">total_</a> -= <a class="code" href="class_a_d_s7828_channel.html#a325a0244f06bcee456c98133019a8484" title="Array of (unscaled) sample values.">samples_</a>[<a class="code" href="class_a_d_s7828_channel.html#a34219ddd59e982d32562f094292b5274" title="Index position within moving average array.">index_</a>];
-  this-&gt;<a class="code" href="class_a_d_s7828_channel.html#a325a0244f06bcee456c98133019a8484" title="Array of (unscaled) sample values.">samples_</a>[<a class="code" href="class_a_d_s7828_channel.html#a34219ddd59e982d32562f094292b5274" title="Index position within moving average array.">index_</a>] = <a class="code" href="class_a_d_s7828_channel.html#af4ff68784f62525fbee8dd9d0584e2c1" title="Return most-recent (unscaled) sample value from moving average array.">sample</a>;
-  this-&gt;<a class="code" href="class_a_d_s7828_channel.html#ad59c1575c352dbbf4f82ed64f39be03e" title="(Unscaled) running total of moving average array elements.">total_</a> += <a class="code" href="class_a_d_s7828_channel.html#a325a0244f06bcee456c98133019a8484" title="Array of (unscaled) sample values.">samples_</a>[<a class="code" href="class_a_d_s7828_channel.html#a34219ddd59e982d32562f094292b5274" title="Index position within moving average array.">index_</a>];
+  this-&gt;<a class="code" href="class_a_d_s7828_channel.html#ad59c1575c352dbbf4f82ed64f39be03e" title="(Unscaled) running total of moving average array elements.">total_</a> -= <a class="code" href="class_a_d_s7828_channel.html#ad018a1b5cc00d10cd75d1c2dba897760" title="Array of (unscaled) sample values.">samples_</a>[<a class="code" href="class_a_d_s7828_channel.html#a34219ddd59e982d32562f094292b5274" title="Index position within moving average array.">index_</a>];
+  this-&gt;<a class="code" href="class_a_d_s7828_channel.html#ad018a1b5cc00d10cd75d1c2dba897760" title="Array of (unscaled) sample values.">samples_</a>[<a class="code" href="class_a_d_s7828_channel.html#a34219ddd59e982d32562f094292b5274" title="Index position within moving average array.">index_</a>] = <a class="code" href="class_a_d_s7828_channel.html#af4ff68784f62525fbee8dd9d0584e2c1" title="Return most-recent (unscaled) sample value from moving average array.">sample</a>;
+  this-&gt;<a class="code" href="class_a_d_s7828_channel.html#ad59c1575c352dbbf4f82ed64f39be03e" title="(Unscaled) running total of moving average array elements.">total_</a> += <a class="code" href="class_a_d_s7828_channel.html#ad018a1b5cc00d10cd75d1c2dba897760" title="Array of (unscaled) sample values.">samples_</a>[<a class="code" href="class_a_d_s7828_channel.html#a34219ddd59e982d32562f094292b5274" title="Index position within moving average array.">index_</a>];
 }
 </pre></div>
 <p><div class="dynheader">
@@ -444,7 +444,7 @@ Here is the caller graph for this function:</div>
   this-&gt;<a class="code" href="class_a_d_s7828_channel.html#a34219ddd59e982d32562f094292b5274" title="Index position within moving average array.">index_</a> = this-&gt;<a class="code" href="class_a_d_s7828_channel.html#ad59c1575c352dbbf4f82ed64f39be03e" title="(Unscaled) running total of moving average array elements.">total_</a> = 0;
   <span class="keywordflow">for</span> (uint8_t k = 0; k &lt; (1 &lt;&lt; <a class="code" href="class_a_d_s7828_channel.html#ac97c771263d85e4bb2f75ae9c27d624f" title="Quantity of samples to be averaged = 2^MOVING_AVERAGE_BITS_.">MOVING_AVERAGE_BITS_</a>); k++)
   {
-    this-&gt;<a class="code" href="class_a_d_s7828_channel.html#a325a0244f06bcee456c98133019a8484" title="Array of (unscaled) sample values.">samples_</a>[k] = 0;
+    this-&gt;<a class="code" href="class_a_d_s7828_channel.html#ad018a1b5cc00d10cd75d1c2dba897760" title="Array of (unscaled) sample values.">samples_</a>[k] = 0;
   }
 }
 </pre></div>
@@ -483,7 +483,7 @@ Here is the caller graph for this function:</div>
  ...
 </pre></div> </dd></dl>
 <div class="fragment"><pre class="fragment">{
-  <span class="keywordflow">return</span> <a class="code" href="class_a_d_s7828_channel.html#a325a0244f06bcee456c98133019a8484" title="Array of (unscaled) sample values.">samples_</a>[<a class="code" href="class_a_d_s7828_channel.html#a34219ddd59e982d32562f094292b5274" title="Index position within moving average array.">index_</a>];
+  <span class="keywordflow">return</span> <a class="code" href="class_a_d_s7828_channel.html#ad018a1b5cc00d10cd75d1c2dba897760" title="Array of (unscaled) sample values.">samples_</a>[<a class="code" href="class_a_d_s7828_channel.html#a34219ddd59e982d32562f094292b5274" title="Index position within moving average array.">index_</a>];
 }
 </pre></div>
 <p><div class="dynheader">
