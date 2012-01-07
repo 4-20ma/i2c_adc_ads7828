@@ -109,7 +109,7 @@ uint8_t ADS7828Channel::id()
 
 /// Return index position within moving average array.
 /// \optional This function is for testing and troubleshooting.
-/// \return index (0..2^MOVING_AVERAGE_BITS_ - 1)
+/// \return index (0..2<sup>\ref MOVING_AVERAGE_BITS_</sup> - 1)
 /// \par Usage:
 /// \code
 /// ...

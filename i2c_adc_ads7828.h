@@ -240,8 +240,9 @@ class ADS7828Channel
     uint16_t total_;
     
     // ............................................. static private attributes
-    /// Quantity of samples to be averaged = 2^MOVING_AVERAGE_BITS_.
-    /// \note MOVING_AVERAGE_BITS_ must match \ref samples_ bit shift.
+    /// Quantity of samples to be averaged =
+    ///   2<sup>\ref MOVING_AVERAGE_BITS_</sup>.
+    /// \note \ref MOVING_AVERAGE_BITS_ must match \ref samples_ bit shift.
     static const uint8_t MOVING_AVERAGE_BITS_ = 4;
 };
 
