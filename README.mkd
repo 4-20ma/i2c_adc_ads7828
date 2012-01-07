@@ -35,7 +35,7 @@ Date       | Rev  | Description
 26-Dec-11  | [v0.6](/2-718/i2c_adc_ads7828/tree/v0.6) |Enable PD0, PD1 bits
 26-Dec-11  | [v0.5](/2-718/i2c_adc_ads7828/tree/v0.5) |Add support for Arduino 1.0
  9-Feb-10  | [v0.4](/2-718/i2c_adc_ads7828/tree/v0.4) |Modified capitalization of functions to match Arduino style where first letter is lower-case
-(unknown)  | [v0.3](/2-718/i2c_adc_ads7828/tree/v0.3) |
+ 7-Feb-10  | [v0.3](/2-718/i2c_adc_ads7828/tree/v0.3) |Fixed #ifndef in i2c_adc_ads7828.h
  6-Feb-10  | [v0.2](/2-718/i2c_adc_ads7828/tree/v0.2) |Added documentation via Doxygen comments within the code; modified/cleaned up layout of code
 31-Jan-10  | [v0.1](/2-718/i2c_adc_ads7828/tree/v0.1) |Initial public release
 
