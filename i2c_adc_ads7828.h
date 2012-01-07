@@ -233,7 +233,7 @@ class ADS7828Channel
     uint8_t index_;
     
     /// Array of (unscaled) sample values.
-    uint16_t samples_[1 << 4];
+    uint16_t samples_[1 << MOVING_AVERAGE_BITS_];
     
     /// (Unscaled) running total of moving average array elements.
     uint16_t total_;
