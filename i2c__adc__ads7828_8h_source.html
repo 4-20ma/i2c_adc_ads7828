@@ -198,62 +198,62 @@
 <a name="l00240"></a><a class="code" href="class_a_d_s7828_channel.html#ad59c1575c352dbbf4f82ed64f39be03e">00240</a>     uint16_t <a class="code" href="class_a_d_s7828_channel.html#ad59c1575c352dbbf4f82ed64f39be03e" title="(Unscaled) running total of moving average array elements.">total_</a>;
 <a name="l00241"></a>00241     
 <a name="l00242"></a>00242     <span class="comment">// ............................................. static private attributes</span>
-<a name="l00245"></a><a class="code" href="class_a_d_s7828_channel.html#ac97c771263d85e4bb2f75ae9c27d624f">00245</a> <span class="comment"></span>    <span class="keyword">static</span> <span class="keyword">const</span> uint8_t <a class="code" href="class_a_d_s7828_channel.html#ac97c771263d85e4bb2f75ae9c27d624f" title="Quantity of samples to be averaged = 2^MOVING_AVERAGE_BITS_.">MOVING_AVERAGE_BITS_</a> = 4;
-<a name="l00246"></a>00246 };
-<a name="l00247"></a>00247 
+<a name="l00246"></a><a class="code" href="class_a_d_s7828_channel.html#ac97c771263d85e4bb2f75ae9c27d624f">00246</a> <span class="comment"></span>    <span class="keyword">static</span> <span class="keyword">const</span> uint8_t <a class="code" href="class_a_d_s7828_channel.html#ac97c771263d85e4bb2f75ae9c27d624f" title="Quantity of samples to be averaged = 2MOVING_AVERAGE_BITS_.">MOVING_AVERAGE_BITS_</a> = 4;
+<a name="l00247"></a>00247 };
 <a name="l00248"></a>00248 
-<a name="l00249"></a><a class="code" href="class_a_d_s7828.html">00249</a> <span class="keyword">class </span><a class="code" href="class_a_d_s7828.html">ADS7828</a>
-<a name="l00250"></a>00250 {
-<a name="l00251"></a>00251   <span class="keyword">public</span>:
-<a name="l00252"></a>00252     <span class="comment">// ............................................... public member functions</span>
-<a name="l00253"></a>00253     <a class="code" href="class_a_d_s7828.html#a33dc6a4fb9d5bd5aef0da8ba473e48e1" title="Constructor with the following defaults:">ADS7828</a>(uint8_t);
-<a name="l00254"></a>00254     <a class="code" href="class_a_d_s7828.html#a33dc6a4fb9d5bd5aef0da8ba473e48e1" title="Constructor with the following defaults:">ADS7828</a>(uint8_t, uint8_t);
-<a name="l00255"></a>00255     <a class="code" href="class_a_d_s7828.html#a33dc6a4fb9d5bd5aef0da8ba473e48e1" title="Constructor with the following defaults:">ADS7828</a>(uint8_t, uint8_t, uint8_t);
-<a name="l00256"></a>00256     <a class="code" href="class_a_d_s7828.html#a33dc6a4fb9d5bd5aef0da8ba473e48e1" title="Constructor with the following defaults:">ADS7828</a>(uint8_t, uint8_t, uint8_t, uint16_t, uint16_t);
-<a name="l00257"></a>00257     uint8_t <a class="code" href="class_a_d_s7828.html#a4ca328b25c7552e61221314a006721ed" title="Device address as defined by pins A1, A0.">address</a>();
-<a name="l00258"></a>00258     <a class="code" href="class_a_d_s7828_channel.html">ADS7828Channel</a>* <a class="code" href="class_a_d_s7828.html#a35fce229052d9e45b228e6d099658dcf" title="Return pointer to channel object.">channel</a>(uint8_t);
-<a name="l00259"></a>00259     uint8_t <a class="code" href="class_a_d_s7828.html#af700fae6cff698172dbe8ac752d74e9b" title="Return command byte for device object (PD1 PD0 bits only).">commandByte</a>();
-<a name="l00260"></a>00260     uint8_t <a class="code" href="class_a_d_s7828.html#abfffd6e7cc6f187a364254813dd25502" title="Initiate communication with device.">start</a>();
-<a name="l00261"></a>00261     uint8_t <a class="code" href="class_a_d_s7828.html#abfffd6e7cc6f187a364254813dd25502" title="Initiate communication with device.">start</a>(uint8_t);
-<a name="l00262"></a>00262     uint8_t <a class="code" href="class_a_d_s7828.html#a6dba71b1fcec938220cb95080956d111" title="Update all unmasked channels on device.">update</a>(); <span class="comment">// single device, all unmasked channel</span>
-<a name="l00263"></a>00263     uint8_t <a class="code" href="class_a_d_s7828.html#a6dba71b1fcec938220cb95080956d111" title="Update all unmasked channels on device.">update</a>(uint8_t); <span class="comment">// single device, single channel</span>
-<a name="l00264"></a>00264     
-<a name="l00265"></a>00265     <span class="comment">// ........................................ static public member functions</span>
-<a name="l00266"></a>00266     <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_a_d_s7828.html#a997f7df889375c592da62a8067207fdc" title="Enable I2C communication.">begin</a>();
-<a name="l00267"></a>00267     <span class="keyword">static</span> <a class="code" href="class_a_d_s7828.html">ADS7828</a>* <a class="code" href="class_a_d_s7828.html#a56f96885756d4e6cb1832a765cd975d9" title="Return pointer to device object.">device</a>(uint8_t);
-<a name="l00268"></a>00268     <span class="keyword">static</span> uint8_t <a class="code" href="class_a_d_s7828.html#a022cd9901b54f9d6352f4a35eca37268" title="Update all unmasked channels on all registered devices.">updateAll</a>(); <span class="comment">// all devices, all unmasked channels</span>
-<a name="l00269"></a>00269     
-<a name="l00270"></a>00270     <span class="comment">// ..................................................... public attributes</span>
-<a name="l00273"></a><a class="code" href="class_a_d_s7828.html#a6df4b5950f74659cd3ce572f3437214d">00273</a> <span class="comment"></span>    uint8_t <a class="code" href="class_a_d_s7828.html#a6df4b5950f74659cd3ce572f3437214d" title="Each bit position containing a 1 represents a channel that is to be read via update() / updateAll()...">channelMask</a>;                    <span class="comment">// mask of active channels</span>
-<a name="l00274"></a>00274     
-<a name="l00275"></a>00275     <span class="comment">// .............................................. static public attributes</span>
-<a name="l00276"></a>00276   
-<a name="l00277"></a>00277   <span class="keyword">private</span>:
-<a name="l00278"></a>00278     <span class="comment">// .............................................. private member functions</span>
-<a name="l00279"></a>00279     <span class="keywordtype">void</span> <a class="code" href="class_a_d_s7828.html#a588dee40a56880d0e2521f52121d9127" title="Common code for constructors.">init</a>(uint8_t, uint8_t, uint8_t, uint16_t, uint16_t);
-<a name="l00280"></a>00280     uint16_t <a class="code" href="class_a_d_s7828.html#afd95a6cc5fa375043f713a5c92e15453" title="Request and receive data from most-recent A/D conversion from device.">read</a>();
-<a name="l00281"></a>00281     
-<a name="l00282"></a>00282     <span class="comment">// ....................................... static private member functions</span>
-<a name="l00283"></a>00283     <span class="keyword">static</span> uint16_t <a class="code" href="class_a_d_s7828.html#afd95a6cc5fa375043f713a5c92e15453" title="Request and receive data from most-recent A/D conversion from device.">read</a>(uint8_t);
-<a name="l00284"></a>00284     <span class="keyword">static</span> uint8_t <a class="code" href="class_a_d_s7828.html#abfffd6e7cc6f187a364254813dd25502" title="Initiate communication with device.">start</a>(uint8_t, uint8_t);
-<a name="l00285"></a>00285     <span class="keyword">static</span> uint8_t <a class="code" href="class_a_d_s7828.html#a6dba71b1fcec938220cb95080956d111" title="Update all unmasked channels on device.">update</a>(<a class="code" href="class_a_d_s7828.html">ADS7828</a>*); <span class="comment">// single device, all unmasked channels</span>
-<a name="l00286"></a>00286     <span class="keyword">static</span> uint8_t <a class="code" href="class_a_d_s7828.html#a6dba71b1fcec938220cb95080956d111" title="Update all unmasked channels on device.">update</a>(<a class="code" href="class_a_d_s7828.html">ADS7828</a>*, uint8_t); <span class="comment">// single device, single channel</span>
-<a name="l00287"></a>00287     
-<a name="l00288"></a>00288     <span class="comment">// .................................................... private attributes</span>
-<a name="l00290"></a><a class="code" href="class_a_d_s7828.html#a6137c5221decbffbe38351da2ae7e61a">00290</a> <span class="comment"></span>    uint8_t <a class="code" href="class_a_d_s7828.html#a6137c5221decbffbe38351da2ae7e61a" title="Device address as defined by pins A1, A0.">address_</a>;
-<a name="l00291"></a>00291     
-<a name="l00293"></a><a class="code" href="class_a_d_s7828.html#a3f5b5bb66151a93aa63f25eccee67bb0">00293</a>     <a class="code" href="class_a_d_s7828_channel.html">ADS7828Channel</a> <a class="code" href="class_a_d_s7828.html#a3f5b5bb66151a93aa63f25eccee67bb0" title="Array of channel objects.">channels_</a>[8];
-<a name="l00294"></a>00294     
-<a name="l00296"></a><a class="code" href="class_a_d_s7828.html#affd4bbbc36a6d6ff49d44fb7a375bbb5">00296</a>     uint8_t <a class="code" href="class_a_d_s7828.html#affd4bbbc36a6d6ff49d44fb7a375bbb5" title="Command byte for device object (PD1 PD0 bits only).">commandByte_</a>;
-<a name="l00297"></a>00297     
-<a name="l00298"></a>00298     <span class="comment">// ............................................. static private attributes</span>
-<a name="l00300"></a><a class="code" href="class_a_d_s7828.html#a19fe01244b01b35a44b224a8498005b1">00300</a> <span class="comment"></span>    <span class="keyword">static</span> <a class="code" href="class_a_d_s7828.html">ADS7828</a>* <a class="code" href="class_a_d_s7828.html#a19fe01244b01b35a44b224a8498005b1" title="Array of pointers to registered device objects.">devices_</a>[4];
-<a name="l00301"></a>00301     
-<a name="l00303"></a><a class="code" href="class_a_d_s7828.html#a863f98c7305f326d35fc78ad51b694c7">00303</a>     <span class="keyword">static</span> <span class="keyword">const</span> uint8_t <a class="code" href="class_a_d_s7828.html#a863f98c7305f326d35fc78ad51b694c7" title="Factory pre-set slave address.">BASE_ADDRESS_</a> = 0x48;
-<a name="l00304"></a>00304 };
-<a name="l00305"></a>00305 <span class="preprocessor">#endif</span>
-<a name="l00306"></a>00306 <span class="preprocessor"></span>
-<a name="l00307"></a>00307 
+<a name="l00249"></a>00249 
+<a name="l00250"></a><a class="code" href="class_a_d_s7828.html">00250</a> <span class="keyword">class </span><a class="code" href="class_a_d_s7828.html">ADS7828</a>
+<a name="l00251"></a>00251 {
+<a name="l00252"></a>00252   <span class="keyword">public</span>:
+<a name="l00253"></a>00253     <span class="comment">// ............................................... public member functions</span>
+<a name="l00254"></a>00254     <a class="code" href="class_a_d_s7828.html#a33dc6a4fb9d5bd5aef0da8ba473e48e1" title="Constructor with the following defaults:">ADS7828</a>(uint8_t);
+<a name="l00255"></a>00255     <a class="code" href="class_a_d_s7828.html#a33dc6a4fb9d5bd5aef0da8ba473e48e1" title="Constructor with the following defaults:">ADS7828</a>(uint8_t, uint8_t);
+<a name="l00256"></a>00256     <a class="code" href="class_a_d_s7828.html#a33dc6a4fb9d5bd5aef0da8ba473e48e1" title="Constructor with the following defaults:">ADS7828</a>(uint8_t, uint8_t, uint8_t);
+<a name="l00257"></a>00257     <a class="code" href="class_a_d_s7828.html#a33dc6a4fb9d5bd5aef0da8ba473e48e1" title="Constructor with the following defaults:">ADS7828</a>(uint8_t, uint8_t, uint8_t, uint16_t, uint16_t);
+<a name="l00258"></a>00258     uint8_t <a class="code" href="class_a_d_s7828.html#a4ca328b25c7552e61221314a006721ed" title="Device address as defined by pins A1, A0.">address</a>();
+<a name="l00259"></a>00259     <a class="code" href="class_a_d_s7828_channel.html">ADS7828Channel</a>* <a class="code" href="class_a_d_s7828.html#a35fce229052d9e45b228e6d099658dcf" title="Return pointer to channel object.">channel</a>(uint8_t);
+<a name="l00260"></a>00260     uint8_t <a class="code" href="class_a_d_s7828.html#af700fae6cff698172dbe8ac752d74e9b" title="Return command byte for device object (PD1 PD0 bits only).">commandByte</a>();
+<a name="l00261"></a>00261     uint8_t <a class="code" href="class_a_d_s7828.html#abfffd6e7cc6f187a364254813dd25502" title="Initiate communication with device.">start</a>();
+<a name="l00262"></a>00262     uint8_t <a class="code" href="class_a_d_s7828.html#abfffd6e7cc6f187a364254813dd25502" title="Initiate communication with device.">start</a>(uint8_t);
+<a name="l00263"></a>00263     uint8_t <a class="code" href="class_a_d_s7828.html#a6dba71b1fcec938220cb95080956d111" title="Update all unmasked channels on device.">update</a>(); <span class="comment">// single device, all unmasked channel</span>
+<a name="l00264"></a>00264     uint8_t <a class="code" href="class_a_d_s7828.html#a6dba71b1fcec938220cb95080956d111" title="Update all unmasked channels on device.">update</a>(uint8_t); <span class="comment">// single device, single channel</span>
+<a name="l00265"></a>00265     
+<a name="l00266"></a>00266     <span class="comment">// ........................................ static public member functions</span>
+<a name="l00267"></a>00267     <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_a_d_s7828.html#a997f7df889375c592da62a8067207fdc" title="Enable I2C communication.">begin</a>();
+<a name="l00268"></a>00268     <span class="keyword">static</span> <a class="code" href="class_a_d_s7828.html">ADS7828</a>* <a class="code" href="class_a_d_s7828.html#a56f96885756d4e6cb1832a765cd975d9" title="Return pointer to device object.">device</a>(uint8_t);
+<a name="l00269"></a>00269     <span class="keyword">static</span> uint8_t <a class="code" href="class_a_d_s7828.html#a022cd9901b54f9d6352f4a35eca37268" title="Update all unmasked channels on all registered devices.">updateAll</a>(); <span class="comment">// all devices, all unmasked channels</span>
+<a name="l00270"></a>00270     
+<a name="l00271"></a>00271     <span class="comment">// ..................................................... public attributes</span>
+<a name="l00274"></a><a class="code" href="class_a_d_s7828.html#a6df4b5950f74659cd3ce572f3437214d">00274</a> <span class="comment"></span>    uint8_t <a class="code" href="class_a_d_s7828.html#a6df4b5950f74659cd3ce572f3437214d" title="Each bit position containing a 1 represents a channel that is to be read via update() / updateAll()...">channelMask</a>;                    <span class="comment">// mask of active channels</span>
+<a name="l00275"></a>00275     
+<a name="l00276"></a>00276     <span class="comment">// .............................................. static public attributes</span>
+<a name="l00277"></a>00277   
+<a name="l00278"></a>00278   <span class="keyword">private</span>:
+<a name="l00279"></a>00279     <span class="comment">// .............................................. private member functions</span>
+<a name="l00280"></a>00280     <span class="keywordtype">void</span> <a class="code" href="class_a_d_s7828.html#a588dee40a56880d0e2521f52121d9127" title="Common code for constructors.">init</a>(uint8_t, uint8_t, uint8_t, uint16_t, uint16_t);
+<a name="l00281"></a>00281     uint16_t <a class="code" href="class_a_d_s7828.html#afd95a6cc5fa375043f713a5c92e15453" title="Request and receive data from most-recent A/D conversion from device.">read</a>();
+<a name="l00282"></a>00282     
+<a name="l00283"></a>00283     <span class="comment">// ....................................... static private member functions</span>
+<a name="l00284"></a>00284     <span class="keyword">static</span> uint16_t <a class="code" href="class_a_d_s7828.html#afd95a6cc5fa375043f713a5c92e15453" title="Request and receive data from most-recent A/D conversion from device.">read</a>(uint8_t);
+<a name="l00285"></a>00285     <span class="keyword">static</span> uint8_t <a class="code" href="class_a_d_s7828.html#abfffd6e7cc6f187a364254813dd25502" title="Initiate communication with device.">start</a>(uint8_t, uint8_t);
+<a name="l00286"></a>00286     <span class="keyword">static</span> uint8_t <a class="code" href="class_a_d_s7828.html#a6dba71b1fcec938220cb95080956d111" title="Update all unmasked channels on device.">update</a>(<a class="code" href="class_a_d_s7828.html">ADS7828</a>*); <span class="comment">// single device, all unmasked channels</span>
+<a name="l00287"></a>00287     <span class="keyword">static</span> uint8_t <a class="code" href="class_a_d_s7828.html#a6dba71b1fcec938220cb95080956d111" title="Update all unmasked channels on device.">update</a>(<a class="code" href="class_a_d_s7828.html">ADS7828</a>*, uint8_t); <span class="comment">// single device, single channel</span>
+<a name="l00288"></a>00288     
+<a name="l00289"></a>00289     <span class="comment">// .................................................... private attributes</span>
+<a name="l00291"></a><a class="code" href="class_a_d_s7828.html#a6137c5221decbffbe38351da2ae7e61a">00291</a> <span class="comment"></span>    uint8_t <a class="code" href="class_a_d_s7828.html#a6137c5221decbffbe38351da2ae7e61a" title="Device address as defined by pins A1, A0.">address_</a>;
+<a name="l00292"></a>00292     
+<a name="l00294"></a><a class="code" href="class_a_d_s7828.html#a3f5b5bb66151a93aa63f25eccee67bb0">00294</a>     <a class="code" href="class_a_d_s7828_channel.html">ADS7828Channel</a> <a class="code" href="class_a_d_s7828.html#a3f5b5bb66151a93aa63f25eccee67bb0" title="Array of channel objects.">channels_</a>[8];
+<a name="l00295"></a>00295     
+<a name="l00297"></a><a class="code" href="class_a_d_s7828.html#affd4bbbc36a6d6ff49d44fb7a375bbb5">00297</a>     uint8_t <a class="code" href="class_a_d_s7828.html#affd4bbbc36a6d6ff49d44fb7a375bbb5" title="Command byte for device object (PD1 PD0 bits only).">commandByte_</a>;
+<a name="l00298"></a>00298     
+<a name="l00299"></a>00299     <span class="comment">// ............................................. static private attributes</span>
+<a name="l00301"></a><a class="code" href="class_a_d_s7828.html#a19fe01244b01b35a44b224a8498005b1">00301</a> <span class="comment"></span>    <span class="keyword">static</span> <a class="code" href="class_a_d_s7828.html">ADS7828</a>* <a class="code" href="class_a_d_s7828.html#a19fe01244b01b35a44b224a8498005b1" title="Array of pointers to registered device objects.">devices_</a>[4];
+<a name="l00302"></a>00302     
+<a name="l00304"></a><a class="code" href="class_a_d_s7828.html#a863f98c7305f326d35fc78ad51b694c7">00304</a>     <span class="keyword">static</span> <span class="keyword">const</span> uint8_t <a class="code" href="class_a_d_s7828.html#a863f98c7305f326d35fc78ad51b694c7" title="Factory pre-set slave address.">BASE_ADDRESS_</a> = 0x48;
+<a name="l00305"></a>00305 };
+<a name="l00306"></a>00306 <span class="preprocessor">#endif</span>
+<a name="l00307"></a>00307 <span class="preprocessor"></span>
+<a name="l00308"></a>00308 
 </pre></div></div><!-- contents -->
 </div>
   <div id="nav-path" class="navpath">
