@@ -533,7 +533,7 @@ void ADS7828::begin()
 /// \endcode
 ADS7828* ADS7828::device(uint8_t address)
 {
-  return devices_[address && 0x03];
+  return devices_[address & 0x03];
 }
 
 
