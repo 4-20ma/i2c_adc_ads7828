@@ -19,7 +19,7 @@ This library has been tested with an Arduino [Duemilanove](http://www.arduino.cc
 
 * Arduino 16 (or earlier):
 
-  Download the zip file, extract and copy the _i2c_adc_ads7828_ folder to _ARDUINO\_HOME/hardware/libraries_. If you are upgrading from a previous version, be sure to delete i2c_adc_ads7828.o.
+    Download the zip file, extract and copy the _i2c_adc_ads7828_ folder to _ARDUINO\_HOME/hardware/libraries_. If you are upgrading from a previous version, be sure to delete i2c_adc_ads7828.o.
 
 ##Support##
 Full [source code documentation](http://2-718.github.com/i2c_adc_ads7828/) is available. Please report any bugs on the [Issue Tracker](/2-718/i2c_adc_ads7828/issues).
