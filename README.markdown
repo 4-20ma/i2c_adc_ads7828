@@ -4,10 +4,13 @@ This is an Arduino library for the Texas Instruments ADS7828 12-bit, 8-channel I
 ## Features
 The following features have been implemented:
 
-  * Up to (4) A/D converters can be used on the same I2C bus (hardware-addressable via pins A0, A1 and software-addressable via ID 0..3)
-  * A/D conversions may be initiated on a bus-, device-, or channel-specific level
+  * Up to (4) A/D converters can be used on the same I2C bus (hardware-
+    addressable via pins A0, A1 and software-addressable via ID 0..3)
+  * A/D conversions may be initiated on a bus-, device-, or channel-specific
+    level
   * Retrieve values as 16-period moving average or last sample
-  * Built-in scaling function to return values in user-defined engineering units
+  * Built-in scaling function to return values in user-defined engineering
+    units
 
 ## Hardware
 This library has been tested with an Arduino [Duemilanove](http://www.arduino.cc/en/Main/ArduinoBoardDuemilanove) and a Texas Instruments [ADS7828](http://focus.ti.com/docs/prod/folders/print/ads7828.html) A/D converter.
