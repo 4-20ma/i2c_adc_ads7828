@@ -34,5 +34,5 @@
 - Added documentation via Doxygen comments within the code; modified/cleaned up layout of code
 
 ---
-## v0.1 (2010-01-31)
+## v0.1 (2010-01-31) 12f66e9096fb64e0855650eef1f7ad8398638f7d
 - Initial public release
