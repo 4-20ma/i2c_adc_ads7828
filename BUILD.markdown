@@ -7,7 +7,6 @@
   ```
 - HISTORY.markdown release history
 
----
 ## Commit source code changes
 ```
 git add .
@@ -15,14 +14,12 @@ git commit -v -m "Update ..."
 git push
 ```
 
----
 ## Tag source code
 ```
 git tag vX.Y.Z
 git push --tags
 ```
 
----
 ## Commit documentation changes
 ```
 cd doc/html
