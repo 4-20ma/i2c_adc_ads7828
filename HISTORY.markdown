@@ -1,3 +1,7 @@
+Date | Rev | Description
+:---:|:---:|:-----------
+2012-01-07 | v1.0.1 | Fix ADS7828::device()
+
 ## [v1.0.2 (2012-01-07)](/2-718/i2c_adc_ads7828/tree/v1.0.2)
 - Fix ADS7828::device()
 
