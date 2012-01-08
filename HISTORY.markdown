@@ -30,9 +30,10 @@
 - Fixed #ifndef in i2c_adc_ads7828.h
 
 ---
-## v0.2 (2010-02-06) TAG: v0.2
+## v0.2 (2010-02-06)
 - Added documentation via Doxygen comments within the code; modified/cleaned up layout of code
 
 ---
-## v0.1 (2010-01-31) SHA: 12f66e9096fb64e0855650eef1f7ad8398638f7d
+## v0.1 (2010-01-31)
+- SHA: 12f66e9096fb64e0855650eef1f7ad8398638f7d
 - Initial public release
