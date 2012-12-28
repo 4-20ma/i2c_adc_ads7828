@@ -20,7 +20,7 @@
   along with i2c_adc_ads7828.  If not, see <http://www.gnu.org/licenses/>.
   
   Written by Doc Walker (Rx)
-  Copyright © 2009-2012 Doc Walker <dfwmountaineers at gmail dot com>
+  Copyright © 2009-2012 Doc Walker <4-20ma at wvfans dot net>
   
 */
 
@@ -41,7 +41,7 @@
 /// \date 7 Jan 2012
 /// \copyright GNU General Public License v3
 /// \par Source Code Repository:
-///   https://github.com/2-718/i2c_adc_ads7828
+///   https://github.com/4-20ma/i2c_adc_ads7828
 /// \par Programming Style Guidelines:
 ///   http://geosoft.no/development/cppstyle.html
 /// \par Schematic:

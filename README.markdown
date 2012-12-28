@@ -22,10 +22,10 @@ This library has been tested with an Arduino [Duemilanove](http://www.arduino.cc
     Download the zip file, extract and copy the _i2c_adc_ads7828_ folder to _ARDUINO\_HOME/hardware/libraries_. If you are upgrading from a previous version, be sure to delete i2c_adc_ads7828.o.
 
 ## Support
-Full [source code documentation](http://2-718.github.com/i2c_adc_ads7828/) is available. Please report any bugs on the [Issue Tracker](/2-718/i2c_adc_ads7828/issues).
+Full [source code documentation](http://4-20ma.github.com/i2c_adc_ads7828/) is available. Please report any bugs on the [Issue Tracker](/4-20ma/i2c_adc_ads7828/issues).
 
 ## Questions/Feedback
-I can be contacted at dfwmountaineers at gmail.
+I can be contacted at 4-20ma at wvfans dot net.
 
 ## Schematic
 Below is a simplified schematic diagram. Refer to the datasheet for specific requirements.
@@ -59,7 +59,7 @@ Below is a simplified schematic diagram. Refer to the datasheet for specific req
 ```
 
 ## Example
-The library contains sketches that demonstrates use of the i2c\_adc\_ads7828 library. You can find these in the [examples](/2-718/i2c_adc_ads7828/tree/master/examples/) folder.
+The library contains sketches that demonstrates use of the i2c\_adc\_ads7828 library. You can find these in the [examples](/4-20ma/i2c_adc_ads7828/tree/master/examples/) folder.
 
 ```c++
 #include <i2c_adc_ads7828.h>
