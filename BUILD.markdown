@@ -1,30 +1,30 @@
 ## Update release version/date
-- VERSION file (use v1.0.2 notation)
-- i2c_adc_ads7828.h file (\date field)
-- source documentation (Doxygen GUI frontend):
+- `VERSION` file (use [semantic versioning](http://semver.org))
+- `i2c_adc_ads7828.h` file (`\date` field)
+- source documentation (Doxygen command-line):
   ```
-  open /Applications/Doxygen.app/
+  $ cd doc/ && doxygen Doxyfile && cd ..
   ```
-- HISTORY.markdown release history
+- `HISTORY.markdown` file release history
 
 ## Commit source code changes
-```
-git add .
-git commit -v -m "Update ..."
-git push
+```bash
+$ git add .
+$ git commit -v -m "Update ..."
+$ git push
 ```
 
 ## Tag source code
-```
-git tag vX.Y.Z
-git push --tags
+```bash
+$ git tag vX.Y.Z
+$ git push --tags
 ```
 
 ## Commit documentation changes
-```
-cd doc/html
-git add .
-git commit -v -m "Update docs ..."
-git push
-cd ../..
+```bash
+$ cd doc/html
+$ git add .
+$ git commit -v -m "Update docs ..."
+$ git push
+$ cd ../..
 ```
