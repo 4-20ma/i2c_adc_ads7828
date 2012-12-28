@@ -1,5 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_a_d_s7828.html#abfffd6e7cc6f187a364254813dd25502" title="Initiate communication with device." alt="" coords="205,5,325,35"/>
-<area shape="rect" id="node5" href="$class_a_d_s7828.html#a35fce229052d9e45b228e6d099658dcf" title="Return pointer to channel object." alt="" coords="196,59,335,88"/>
-<area shape="rect" id="node7" href="$class_a_d_s7828.html#af700fae6cff698172dbe8ac752d74e9b" title="Return command byte for device object (PD1 PD0 bits only)." alt="" coords="173,112,357,141"/>
-</map>
