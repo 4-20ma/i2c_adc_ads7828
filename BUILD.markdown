@@ -1,27 +1,25 @@
 ## Update release version/date
-- `VERSION` file (use [semantic versioning](http://semver.org))
-- `i2c_adc_ads7828.h` file (`\date` field)
-- source documentation (Doxygen command-line):
-  ```
-  $ cd doc/ && doxygen Doxyfile && cd ..
-  ```
-- `HISTORY.markdown` file release history
-
-## Commit source code changes
+- update version, as appropriate:
 ```bash
-$ git add .
-$ git commit -v -m "Update ..."
-$ git push
+$ rake version:bump       # or
+$ rake version:bump:minor # or
+$ rake version:bump:major
 ```
 
-## Tag source code
+- update `HISTORY.markdown` file:
 ```bash
-$ git tag vX.Y.Z
-$ git push --tags
+$ rake prepare
 ```
+
+- update release date, add & commit files, tag, push to origin/master:
+```bash
+$ rake release
+```
+
 
 ## Commit documentation changes
 ```bash
+$ cd doc/ && doxygen Doxyfile && cd ..
 $ cd doc/html
 $ git add .
 $ git commit -v -m "Update docs ..."
