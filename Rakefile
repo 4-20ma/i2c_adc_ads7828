@@ -23,7 +23,14 @@ desc 'Prepare HISTORY file for release'
 task :prepare => 'prepare:default'
 
 namespace :prepare do
-  task :default => [:release_date, :history]
+  task :default => [:release_date, :history, :documentation]
+  
+  desc 'Update documentation'
+  task :documentation do
+    # chdir to doc/ and call doxygen to update documentation
+    Dir.chdir('doc')
+    system('doxygen', 'Doxyfile')
+  end # task :documentation
   
   desc 'Update release history'
   task :history, :tag do |t, args|
