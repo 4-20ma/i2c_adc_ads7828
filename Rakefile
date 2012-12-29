@@ -19,6 +19,41 @@ HISTORY_FILE    = 'HISTORY.markdown'
 VERSION_FILE    = Version.version_file('').basename.to_s
 
 
+task :default => :info
+
+desc 'Display instructions for public release'
+task :info do
+  puts <<-EOF.gsub(/^\s{2}/, '')
+  
+  Instructions for public release
+  
+  - Update version, as appropriate:
+  
+    $ rake version:bump           # or
+    $ rake version:bump:minor     # or
+    $ rake version:bump:major     # or
+    edit 'VERSION' file directly
+    
+  - Prepare release date, 'HISTORY.markdown' file, documentation:
+  
+    $ rake prepare
+    
+  - Review changes to 'HISTORY.markdown' file
+    This file is assembled using git commit messages; review for completeness.
+  
+  - Review html documentation files
+    These files are assembled using source code Doxygen tags; review for
+    for completeness.
+  
+  - Add & commit source files, tag, push to origin/master;
+    add & commit documentation files, push to origin/gh-pages:
+  
+    $ rake release
+    
+  EOF
+end # task :info
+
+
 desc 'Prepare HISTORY file for release'
 task :prepare => 'prepare:default'
 
