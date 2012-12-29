@@ -77,14 +77,14 @@ task :release => 'release:default'
 namespace :release do
   task :default => ['prepare:release_date', :commit]
   
-  desc 'Commit changes related to version bump'
-  task :commit do
+  desc 'Commit source changes related to version bump'
+  task :source do
     version = Version.current.to_s
     `git add #{HEADER_FILE} #{HISTORY_FILE} #{VERSION_FILE}`
     `git commit -m 'Version bump to v#{version}'`
     `git tag -a -f -m 'Version v#{version}' v#{version}`
     `git push origin master`
     `git push --tags`
-  end # task :commit
+  end # task :source
   
 end # namespace :release
