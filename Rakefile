@@ -55,7 +55,7 @@ namespace :prepare do
     file = File.join(cwd, HEADER_FILE)
     
     contents = IO.read(file)
-    contents.sub!(/(\\date )(.*)$/) do |match|
+    contents.sub!(/(\\date\s*)(.*)$/) do |match|
       "#{$1}#{Time.now.strftime('%-d %b %Y')}"
     end # contents.sub!(...)
     IO.write(file, contents)
