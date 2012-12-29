@@ -71,7 +71,7 @@ namespace :prepare do
 end # namespace :prepare
 
 
-desc 'Release'
+desc 'Release source & documentation'
 task :release => 'release:default'
 
 namespace :release do
