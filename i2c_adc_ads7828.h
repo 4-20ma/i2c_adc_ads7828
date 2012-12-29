@@ -38,7 +38,7 @@
 /// package. 
 /// \author Doc Walker
 /// \version \verbinclude VERSION
-/// \date 7 Jan 2012
+/// \date 29 Dec 2012
 /// \copyright GNU General Public License v3
 /// \par Source Code Repository:
 ///   https://github.com/4-20ma/i2c_adc_ads7828

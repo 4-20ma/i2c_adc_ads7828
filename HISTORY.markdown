@@ -1,3 +1,36 @@
+## [v1.1.0 (2012-12-29)](/4-20ma/i2c_adc_ads7828/tree/v1.1.0)
+- Update BUILD instructions to use rake tasks
+- Add rake tasks for preparing/releasing source
+- Remove leading 'v' from version
+- Update BUILD.markdown instructions
+- Update links to source code repo
+- Update copyrights, contact info
+- Undo wrap at 78 cols (doesn't affect output)
+- Modify features section to wrap at 78 cols
+- Revert to headings/bullets format
+- First attempt at multi-line cells
+- Add another line to the table
+- Experiment with multiline table
+- Add auto-links to each version in HISTORY
+- Prefix link with /
+- Add manual auto-link to v0.1
+- Try SHA auto-link on separate line
+- Fix SHA auto-link, try tag auto-link
+- Add SHA1 to HISTORY v0.1
+- Cleanup markdown syntax; fix example pluralization
+- Add hanging indent on installation section
+- Work on hanging indent
+- Experiment with multiline bulleted layout
+- Remove horizontal rules
+- Replace bullets * with -
+- Convert BUILD from text to markdown
+- Change BUILD to use extension .markdown
+- Add horizontal rules to HISTORY
+- Change README extension to .markdown (was .mkd)
+- Revise HISTORY to be clearer when viewed as text
+- Move history to separate file
+
+---
 ## [v1.0.2 (2012-01-07)](/4-20ma/i2c_adc_ads7828/tree/v1.0.2)
 - Fix ADS7828::device()
 
