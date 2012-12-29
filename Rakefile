@@ -35,6 +35,8 @@ namespace :prepare do
     
     history = "## [v#{current_tag} (#{Time.now.strftime('%Y-%m-%d')})]"
     history << "(/#{GITHUB_USERNAME}/#{GITHUB_REPO}/tree/v#{current_tag})\n"
+    
+    # TODO: handle case where prior_tag is nil; log.between(nil) fails
     history << g.log.between(prior_tag).map do |commit|
       "- #{commit.message}"
     end.join("\n")
