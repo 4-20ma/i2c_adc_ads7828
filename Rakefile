@@ -76,7 +76,7 @@ namespace :release do
     `git add #{HEADER_FILE} #{HISTORY_FILE} #{VERSION_FILE}`
     `git commit -m 'Version bump to v#{version}'`
     `git tag -a -f -m 'Version v#{version}' v#{version}`
-    `git push --tags`
+    `git push --all --tags`
   end # task :commit
   
 end # namespace :release
