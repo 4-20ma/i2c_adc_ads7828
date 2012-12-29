@@ -35,7 +35,7 @@ namespace :prepare do
     
     history = "## [v#{current_tag} (#{Time.now.strftime('%Y-%m-%d')})]"
     history << "(/#{GITHUB_USERNAME}/#{GITHUB_REPO}/tree/v#{current_tag})\n"
-    history << g.log.since(prior_tag).map do |commit|
+    history << g.log.between(prior_tag).map do |commit|
       "- #{commit.message}"
     end.join("\n")
     history << "\n\n---\n"
