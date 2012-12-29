@@ -1,3 +1,11 @@
+## [v1.1.4 (2012-12-29)](/4-20ma/i2c_adc_ads7828/tree/v1.1.4)
+- Update description of default release task
+- Add release:documentation task
+- Rename release:commit task to release:source
+- Add prepare:documentation task
+- Adjust prepare:release date regex
+
+---
 ## [v1.1.3 (2012-12-29)](/4-20ma/i2c_adc_ads7828/tree/v1.1.3)
 - Fix git push command
 
