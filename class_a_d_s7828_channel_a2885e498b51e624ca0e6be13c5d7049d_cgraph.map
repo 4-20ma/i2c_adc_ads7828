@@ -1,0 +1,4 @@
+<map id="ADS7828Channel::ADS7828Channel" name="ADS7828Channel::ADS7828Channel">
+<area shape="rect" id="node3" href="$class_a_d_s7828_channel.html#a23c4b3feb7906925490006c89a0bd6b8" title="Return pointer to parent device object." alt="" coords="310,5,493,35"/>
+<area shape="rect" id="node5" href="$class_a_d_s7828_channel.html#ad582f45fd0b5c74fedcebafca0715915" title="Reset moving average array, index, totalizer to zero." alt="" coords="314,59,489,90"/>
+</map>

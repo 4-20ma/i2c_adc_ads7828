@@ -1,9 +1,0 @@
-digraph "two_devices" {
-  compound=true
-  node [ fontsize="10", fontname="FreeSans"];
-  edge [ labelfontsize="10", labelfontname="FreeSans"];
-  subgraph clusterdir_d28a4824dc47e487b107a5db32ef43c4 {
-    graph [ bgcolor="#ddddee", pencolor="black", label="examples" fontname="FreeSans", fontsize="10", URL="dir_d28a4824dc47e487b107a5db32ef43c4.html"]
-  dir_6aa027bf39687c39dc976ede2f34c04f [shape=box, label="two_devices", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_6aa027bf39687c39dc976ede2f34c04f.html"];
-  }
-}

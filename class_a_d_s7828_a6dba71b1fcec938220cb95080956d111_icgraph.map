@@ -1,0 +1,5 @@
+<map id="ADS7828::update" name="ADS7828::update">
+<area shape="rect" id="node3" href="$class_a_d_s7828_channel.html#a19e8ecf99f6c3847c7f26cf2157758b6" title="Initiate A/D conversion, read data, update moving average for channel object." alt="" coords="190,5,378,35"/>
+<area shape="rect" id="node5" href="$class_a_d_s7828.html#ad86beb6bab4f6dc79043d35bf3c2c3b7" title="ADS7828::update" alt="" coords="217,59,351,90"/>
+<area shape="rect" id="node7" href="$class_a_d_s7828.html#a022cd9901b54f9d6352f4a35eca37268" title="Update all unmasked channels on all registered devices." alt="" coords="208,114,360,145"/>
+</map>

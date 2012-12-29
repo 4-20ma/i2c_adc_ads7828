@@ -1,9 +1,0 @@
-digraph "ADS7828::ADS7828"
-{
-  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
-  node [fontname="FreeSans",fontsize="10",shape=record];
-  rankdir="LR";
-  Node1 [label="ADS7828::ADS7828",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
-  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
-  Node2 [label="ADS7828::init",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_a_d_s7828.html#a588dee40a56880d0e2521f52121d9127",tooltip="Common code for constructors."];
-}

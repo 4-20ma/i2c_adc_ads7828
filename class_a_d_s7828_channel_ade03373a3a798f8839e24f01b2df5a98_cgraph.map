@@ -1,0 +1,3 @@
+<map id="ADS7828Channel::commandByte" name="ADS7828Channel::commandByte">
+<area shape="rect" id="node3" href="$class_a_d_s7828.html#af700fae6cff698172dbe8ac752d74e9b" title="Return command byte for device object (PD1 PD0 bits only)." alt="" coords="288,5,469,35"/>
+</map>

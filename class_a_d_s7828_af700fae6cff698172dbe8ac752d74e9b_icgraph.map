@@ -1,0 +1,4 @@
+<map id="ADS7828::commandByte" name="ADS7828::commandByte">
+<area shape="rect" id="node3" href="$class_a_d_s7828_channel.html#ade03373a3a798f8839e24f01b2df5a98" title="Return command byte for channel object." alt="" coords="235,5,469,35"/>
+<area shape="rect" id="node5" href="$class_a_d_s7828.html#a73a86f1b19ef220e9d119551fea5e376" title="ADS7828::start" alt="" coords="292,59,412,90"/>
+</map>

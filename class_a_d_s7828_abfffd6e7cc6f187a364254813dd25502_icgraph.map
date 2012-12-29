@@ -1,0 +1,5 @@
+<map id="ADS7828::start" name="ADS7828::start">
+<area shape="rect" id="node3" href="$class_a_d_s7828_channel.html#ad9204ca49ffa28e0ea681651a7afcf88" title="Initiate A/D conversion for channel object." alt="" coords="174,5,346,35"/>
+<area shape="rect" id="node5" href="$class_a_d_s7828.html#a73a86f1b19ef220e9d119551fea5e376" title="ADS7828::start" alt="" coords="200,59,320,90"/>
+<area shape="rect" id="node7" href="$class_a_d_s7828.html#a825149c18833c4aa25ebf0f08a75379d" title="Initiate communication with device." alt="" coords="193,114,327,145"/>
+</map>
