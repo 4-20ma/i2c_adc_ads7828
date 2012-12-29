@@ -1,3 +1,7 @@
+## [v1.1.2 (2012-12-29)](/4-20ma/i2c_adc_ads7828/tree/v1.1.2)
+- Attempt to push all commits in one shot
+
+---
 ## [v1.1.1 (2012-12-29)](/4-20ma/i2c_adc_ads7828/tree/v1.1.1)
 - Add TODO item to fix case where no tags exist yet
 - Fix prepare:history to properly parse log entries
