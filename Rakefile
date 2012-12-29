@@ -25,14 +25,14 @@ task :prepare => 'prepare:default'
 namespace :prepare do
   task :default => [:release_date, :history, :documentation]
   
-  desc 'Update documentation'
+  desc 'Prepare documentation'
   task :documentation do
     # chdir to doc/ and call doxygen to update documentation
     Dir.chdir('doc')
     system('doxygen', 'Doxyfile')
   end # task :documentation
   
-  desc 'Update release history'
+  desc 'Prepare release history'
   task :history, :tag do |t, args|
     cwd = File.expand_path(File.dirname(__FILE__))
     g = Git.open(cwd)
