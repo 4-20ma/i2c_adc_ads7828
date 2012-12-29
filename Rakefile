@@ -25,18 +25,6 @@ task :prepare => 'prepare:default'
 namespace :prepare do
   task :default => [:release_date, :history]
   
-  desc 'Update release date in header file'
-  task :release_date do
-    cwd = File.expand_path(File.dirname(__FILE__))
-    file = File.join(cwd, HEADER_FILE)
-    
-    contents = IO.read(file)
-    contents.sub!(/(\\date )(.*)$/) do |match|
-      "#{$1}#{Time.now.strftime('%-d %b %Y')}"
-    end # contents.sub!(...)
-    IO.write(file, contents)
-  end # task :release_date
-  
   desc 'Update release history'
   task :history, :tag do |t, args|
     cwd = File.expand_path(File.dirname(__FILE__))
@@ -58,6 +46,18 @@ namespace :prepare do
     contents = IO.read(file)
     IO.write(file, history << contents)
   end # task :history
+  
+  desc 'Update release date in header file'
+  task :release_date do
+    cwd = File.expand_path(File.dirname(__FILE__))
+    file = File.join(cwd, HEADER_FILE)
+    
+    contents = IO.read(file)
+    contents.sub!(/(\\date )(.*)$/) do |match|
+      "#{$1}#{Time.now.strftime('%-d %b %Y')}"
+    end # contents.sub!(...)
+    IO.write(file, contents)
+  end # task :release_date
   
 end # namespace :prepare
 
