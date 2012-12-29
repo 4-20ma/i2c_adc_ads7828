@@ -1,3 +1,9 @@
+## [v1.1.5 (2012-12-29)](/4-20ma/i2c_adc_ads7828/tree/v1.1.5)
+- Remove deprecated BUILD.markdown (use `rake info`)
+- Add info task to display release instructions
+- Reword task descriptions to use 'Prepare'
+
+---
 ## [v1.1.4 (2012-12-29)](/4-20ma/i2c_adc_ads7828/tree/v1.1.4)
 - Update description of default release task
 - Add release:documentation task
