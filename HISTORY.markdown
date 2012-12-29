@@ -1,3 +1,7 @@
+## [v1.1.3 (2012-12-29)](/4-20ma/i2c_adc_ads7828/tree/v1.1.3)
+- Fix git push command
+
+---
 ## [v1.1.2 (2012-12-29)](/4-20ma/i2c_adc_ads7828/tree/v1.1.2)
 - Attempt to push all commits in one shot
 
