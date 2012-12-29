@@ -75,7 +75,33 @@ desc 'Release'
 task :release => 'release:default'
 
 namespace :release do
-  task :default => ['prepare:release_date', :commit]
+  task :default => [:source, :documentation]
+  
+  desc 'Commit documentation changes related to version bump'
+  task :documentation do
+    version = Version.current.to_s
+    cwd = File.expand_path(File.join(File.dirname(__FILE__), 'doc', 'html'))
+    g = Git.open(cwd)
+    
+    # `git add .`
+    g.add
+    
+    # remove each deleted item
+    g.status.deleted.each do |item|
+      g.remove(item[0])
+    end # g.status.deleted.each
+    
+    # commit changes if items added, changed, or deleted
+    if g.status.added.size > 0 || g.status.changed.size > 0 ||
+      g.status.deleted.size > 0 then
+      message = "Update documentation for v#{version}"
+      puts g.commit(message)
+    else
+      puts "No changes to commit v#{version}"
+    end # if g.status.added.size > 0 || g.status.changed.size > 0...
+    
+    g.push('origin', 'gh-pages')
+  end # task :documentation
   
   desc 'Commit source changes related to version bump'
   task :source do
