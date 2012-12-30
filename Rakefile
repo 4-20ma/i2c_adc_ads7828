@@ -73,13 +73,13 @@ namespace :prepare do
     g = Git.open(cwd)
     
     current_tag = args[:tag] || Version.current.to_s
-    prior_tag = g.tags.last   # may be nil
+    prior_tag = g.tags.last
     
     history = "## [v#{current_tag} (#{Time.now.strftime('%Y-%m-%d')})]"
     history << "(/#{GITHUB_USERNAME}/#{GITHUB_REPO}/tree/v#{current_tag})\n"
     
-    # TODO: handle case where prior_tag is nil; log.between(nil) fails
-    history << g.log.between(prior_tag).map do |commit|
+    commits = prior_tag ? g.log.between(prior_tag) : g.log
+    history << commits.map do |commit|
       "- #{commit.message}"
     end.join("\n")
     history << "\n\n---\n"
