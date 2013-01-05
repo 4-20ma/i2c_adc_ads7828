@@ -61,7 +61,7 @@ namespace :prepare do
   task :default => [:release_date, :history, :documentation]
   
   desc 'Prepare documentation'
-  task :documentation do
+  task :documentation => :first_time do
     version = Version.current.to_s
     
     # update parameters in Doxyfile
@@ -86,6 +86,28 @@ namespace :prepare do
     FileUtils.mv(File.join(from, 'refman.pdf'),
       File.join(to, "#{GITHUB_REPO} reference-#{version}.pdf"))
   end # task :documentation
+  
+  # desc 'Prepare doc/html directory (first-time only)'
+  task :first_time do
+    cwd = File.expand_path(File.join(File.dirname(__FILE__), 'doc', 'html'))
+    FileUtils.mkdir_p(cwd)
+    Dir.chdir(cwd)
+    
+    # skip if this operation has already been completed
+    next if 'refs/heads/gh-pages' == `git config branch.gh-pages.merge`.chomp
+    
+    # configure git remote/branch options
+    origin = "git@github.com_#{GITHUB_USERNAME}:#{GITHUB_USERNAME}/" +
+      "#{GITHUB_REPO}.git"
+    `git init`
+    `git remote add origin #{origin}`
+    `git checkout --orphan gh-pages`
+    `git config --replace-all branch.gh-pages.remote origin`
+    `git config --replace-all branch.gh-pages.merge refs/heads/gh-pages`
+    `touch index.html`
+    `git add .`
+    `git commit -a -m 'Initial commit'`
+  end
   
   desc 'Prepare release history'
   task :history, :tag do |t, args|
