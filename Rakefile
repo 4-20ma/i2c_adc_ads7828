@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 require 'git'
+require 'github_changelog_generator/task'
 require 'rake'
 require 'rubygems'
 require 'rake/version_task'         # gem install version
@@ -22,7 +23,8 @@ DOXYFILE        = 'Doxyfile'
 GITHUB_USERNAME = '4-20ma'
 GITHUB_REPO     = 'i2c_adc_ads7828'
 HEADER_FILE     = "#{GITHUB_REPO}.h"
-HISTORY_FILE    = 'HISTORY.markdown'
+CHANGELOG       = 'CHANGELOG'
+CHANGELOG_FILE  = "#{CHANGELOG}.md"
 PROPERTIES_FILE = 'library.properties'
 VERSION_FILE    = Version.version_file('').basename.to_s
 
@@ -42,11 +44,11 @@ task :info do
     $ rake version:bump:major     # or
     edit 'VERSION' file directly
     
-  - Prepare release date, 'HISTORY.markdown' file, documentation:
+  - Prepare release date, '#{CHANGELOG_FILE}' file, documentation:
   
     $ rake prepare
     
-  - Review changes to 'HISTORY.markdown' file
+  - Review changes to '#{CHANGELOG_FILE}' file
     This file is assembled using git commit messages; review for completeness.
   
   - Review html documentation files
@@ -62,11 +64,11 @@ task :info do
 end # task :info
 
 
-desc 'Prepare HISTORY file for release'
+desc "Prepare #{CHANGELOG_FILE} for release"
 task :prepare => 'prepare:default'
 
 namespace :prepare do
-  task :default => %w(release_date library_properties history documentation)
+  task :default => %w(release_date library_properties changelog documentation)
   
   desc 'Prepare documentation'
   task :documentation => :first_time do
@@ -117,31 +119,26 @@ namespace :prepare do
     `git add .`
     `git commit -a -m 'Initial commit'`
   end
-  
+
   desc 'Prepare release history'
-  task :history, :tag do |t, args|
-    cwd = File.expand_path(__dir__)
-    g = Git.open(cwd)
-    
-    current_tag = args[:tag] || Version.current.to_s
-    prior_tag = g.tags.last
-    
-    history = "## [v#{current_tag} (#{Time.now.strftime('%Y-%m-%d')})]"
-    history << "(/#{GITHUB_USERNAME}/#{GITHUB_REPO}/tree/v#{current_tag})\n"
-    
-    commits = prior_tag ? g.log.between(prior_tag) : g.log
-    history << commits.map do |commit|
-      "- #{commit.message}"
-    end.join("\n")
-    history << "\n\n---\n"
-    
-    file = File.join(cwd, HISTORY_FILE)
-    puts "Updating file #{file}:"
-    puts history
-    contents = IO.read(file)
-    IO.write(file, history << contents)
-  end # task :history
-  
+  GitHubChangelogGenerator::RakeTask.new(:changelog) do |config|
+    config.add_issues_wo_labels = false
+    config.add_pr_wo_labels = false
+    config.enhancement_labels = [
+      'Type: Enhancement',
+      'Type: Feature Request'
+    ]
+    config.enhancement_prefix = 'IMPROVEMENTS'
+    config.bug_labels = ['Type: Bug']
+    config.bug_prefix = 'BUG FIXES'
+    config.future_release = "v#{Version.current.to_s}"
+    config.header = "# #{GITHUB_REPO} #{CHANGELOG}"
+    config.include_labels = [CHANGELOG]
+    config.merge_prefix = 'OTHER' # e.g. 'Type: Maintenance'
+    config.project = GITHUB_REPO
+    config.user = GITHUB_USERNAME
+  end # GitHubChangelogGenerator::RakeTask.new
+
   desc 'Update version in library properties file'
   task :library_properties do
     version = Version.current.to_s
@@ -175,7 +172,7 @@ desc 'Release source & documentation'
 task :release => 'release:default'
 
 namespace :release do
-  task :default => [:source, :documentation]
+  task :default => %w(source documentation)
   
   desc 'Commit documentation changes related to version bump'
   task :documentation do
@@ -210,7 +207,7 @@ namespace :release do
       doc/#{DOXYFILE} \
       "extras/#{GITHUB_REPO} reference-#{version}.pdf" \
       src/#{HEADER_FILE} \
-      #{HISTORY_FILE} \
+      #{CHANGELOG_FILE} \
       #{PROPERTIES_FILE} \
       #{VERSION_FILE} \
     `
