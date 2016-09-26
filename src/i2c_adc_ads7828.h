@@ -26,7 +26,14 @@
 
 
 /// \mainpage Arduino library for TI ADS7828 I2C A/D converter.
+/// \version \verbinclude VERSION
+/// \date 29 Dec 2012
+/// \par Source Code Repository:
+///   https://github.com/4-20ma/i2c_adc_ads7828
+/// \par Programming Style Guidelines:
+///   http://geosoft.no/development/cppstyle.html
 /// 
+/// \par Features
 /// The ADS7828 is a single-supply, low-power, 12-bit data acquisition 
 /// device that features a serial I2C interface and an 8-channel 
 /// multiplexer. The Analog-to-Digital (A/D) converter features a 
@@ -36,16 +43,18 @@
 /// converter to be close to the input source in remote locations and for 
 /// applications requiring isolation. The ADS7828 is available in a TSSOP-16 
 /// package. 
-/// \author Doc Walker
-/// \version \verbinclude VERSION
-/// \date 29 Dec 2012
-/// \copyright GNU General Public License v3
-/// \par Source Code Repository:
-///   https://github.com/4-20ma/i2c_adc_ads7828
-/// \par Programming Style Guidelines:
-///   http://geosoft.no/development/cppstyle.html
-/// \par Schematic:
+/// \par Schematic
 ///   \verbinclude SCHEMATIC
+/// \par Caveats
+///   Conforms to Arduino IDE 1.5 Library Specification v2.1 which requires
+///   Arduino IDE >= 1.5.
+/// \par Support
+/// Please [submit an issue](https://github.com/4-20ma/i2c_adc_ads7828/
+/// issues) for all questions, bug reports, and feature requests. Email
+/// requests will be politely redirected to the issue tracker so others may
+/// contribute to the discussion and requestors get a more timely response.
+/// \author Doc Walker ([4-20ma@wvfans.net](mailto:4-20ma@wvfans.net))
+/// \copyright 2009-2016 Doc Walker
 
 
 #ifndef i2c_adc_ads7828_h
