@@ -6,6 +6,12 @@ require 'rubygems'
 require 'rake/version_task'         # gem install version
 require 'version'
 
+# requires additional packages on MacOS (including Homebrew):
+# $ /usr/bin/ruby -e "$(curl -fsSL \
+#   https://raw.githubusercontent.com/Homebrew/install/master/install)"
+# $ brew install doxygen        # generates documentation from source code
+# $ brew cask install mactex    # MacTeX
+
 Rake::VersionTask.new do |task|
   # prevent auto-commit on version bump
   task.with_git = false
