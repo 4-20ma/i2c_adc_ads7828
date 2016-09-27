@@ -1,5 +1,24 @@
 # i2c_adc_ads7828 CHANGELOG
 
+## [v2.0.0](https://github.com/4-20ma/i2c_adc_ads7828/tree/v2.0.0) (2016-09-26)
+[Full Changelog](https://github.com/4-20ma/i2c_adc_ads7828/compare/v1.1.5...v2.0.0)
+
+IMPROVEMENTS
+
+- Add Code of Conduct [\#16](https://github.com/4-20ma/i2c_adc_ads7828/pull/16) ([4-20ma](https://github.com/4-20ma))
+- \[BREAK\] Change project license to Apache 2.0 [\#8](https://github.com/4-20ma/i2c_adc_ads7828/pull/8) ([4-20ma](https://github.com/4-20ma))
+- Automate CHANGELOG [\#6](https://github.com/4-20ma/i2c_adc_ads7828/pull/6) ([4-20ma](https://github.com/4-20ma))
+- Add continuous integration testing via Travis CI [\#4](https://github.com/4-20ma/i2c_adc_ads7828/pull/4) ([4-20ma](https://github.com/4-20ma))
+- \[BREAK\] Update to IDE 1.5 library format v2.1 [\#3](https://github.com/4-20ma/i2c_adc_ads7828/pull/3) ([4-20ma](https://github.com/4-20ma))
+
+OTHER
+
+- Fix README link to examples folder [\#20](https://github.com/4-20ma/i2c_adc_ads7828/pull/20) ([4-20ma](https://github.com/4-20ma))
+- Remove extraneous \#includes/whitespace [\#18](https://github.com/4-20ma/i2c_adc_ads7828/pull/18) ([4-20ma](https://github.com/4-20ma))
+- Update README content, layout, extension [\#14](https://github.com/4-20ma/i2c_adc_ads7828/pull/14) ([4-20ma](https://github.com/4-20ma))
+- Add standard files to .gitignore [\#12](https://github.com/4-20ma/i2c_adc_ads7828/pull/12) ([4-20ma](https://github.com/4-20ma))
+- Rename .pde files .ino [\#10](https://github.com/4-20ma/i2c_adc_ads7828/pull/10) ([4-20ma](https://github.com/4-20ma))
+
 ## [v1.1.5](https://github.com/4-20ma/i2c_adc_ads7828/tree/v1.1.5) (2012-12-29)
 [Full Changelog](https://github.com/4-20ma/i2c_adc_ads7828/compare/v1.1.4...v1.1.5)
 
