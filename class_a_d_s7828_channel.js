@@ -19,6 +19,5 @@ var class_a_d_s7828_channel =
     [ "device_", "class_a_d_s7828_channel.html#a00e469ff13dcaa5fa9f647ca9165cf94", null ],
     [ "index_", "class_a_d_s7828_channel.html#a34219ddd59e982d32562f094292b5274", null ],
     [ "samples_", "class_a_d_s7828_channel.html#a325a0244f06bcee456c98133019a8484", null ],
-    [ "total_", "class_a_d_s7828_channel.html#ad59c1575c352dbbf4f82ed64f39be03e", null ],
-    [ "MOVING_AVERAGE_BITS_", "class_a_d_s7828_channel.html#ac97c771263d85e4bb2f75ae9c27d624f", null ]
+    [ "total_", "class_a_d_s7828_channel.html#ad59c1575c352dbbf4f82ed64f39be03e", null ]
 ];

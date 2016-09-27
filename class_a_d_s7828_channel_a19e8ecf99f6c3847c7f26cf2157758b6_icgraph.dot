@@ -1,0 +1,12 @@
+digraph "ADS7828Channel::update"
+{
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  rankdir="LR";
+  Node35 [label="ADS7828Channel::update",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node35 -> Node36 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node36 [label="ADS7828::update",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_a_d_s7828.html#a6dba71b1fcec938220cb95080956d111",tooltip="Update all unmasked channels on device. "];
+  Node36 -> Node35 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node35 -> Node37 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node37 [label="ADS7828::updateAll",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_a_d_s7828.html#a022cd9901b54f9d6352f4a35eca37268",tooltip="Update all unmasked channels on all registered devices. "];
+}

@@ -1,0 +1,10 @@
+digraph "ADS7828::update"
+{
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  rankdir="LR";
+  Node28 [label="ADS7828::update",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node28 -> Node29 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node29 [label="ADS7828Channel::update",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_a_d_s7828_channel.html#a19e8ecf99f6c3847c7f26cf2157758b6",tooltip="Initiate A/D conversion, read data, update moving average for channel object. "];
+  Node29 -> Node28 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+}

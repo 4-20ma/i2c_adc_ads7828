@@ -1,0 +1,10 @@
+digraph "ADS7828::start"
+{
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  rankdir="LR";
+  Node17 [label="ADS7828::start",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node17 -> Node18 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node18 [label="ADS7828Channel::start",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_a_d_s7828_channel.html#ad9204ca49ffa28e0ea681651a7afcf88",tooltip="Initiate A/D conversion for channel object. "];
+  Node18 -> Node17 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+}
