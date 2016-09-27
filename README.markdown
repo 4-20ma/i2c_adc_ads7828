@@ -1,3 +1,12 @@
+# i2c_adc_ads7828
+[![GitHub release](https://img.shields.io/github/release/4-20ma/i2c_adc_ads7828.svg?maxAge=3600)][GitHub release]
+[![Travis](https://img.shields.io/travis/4-20ma/i2c_adc_ads7828.svg?maxAge=3600)][Travis]
+[![license](https://img.shields.io/github/license/4-20ma/i2c_adc_ads7828.svg?maxAge=3600)][license]
+
+[GitHub release]:   https://github.com/4-20ma/i2c_adc_ads7828
+[Travis]:           https://travis-ci.org/4-20ma/i2c_adc_ads7828
+[license]:          LICENSE
+
 ## Overview
 This is an Arduino library for the Texas Instruments ADS7828 12-bit, 8-channel I2C A/D converter. **Updated to support Arduino 1.0.**
 
@@ -122,4 +131,25 @@ void loop()
   // delay
   delay(1000);
 }
+```
+
+
+## License & Authors
+
+- Author:: Doc Walker ([4-20ma@wvfans.net](mailto:4-20ma@wvfans.net))
+
+```
+Copyright:: 2009-2016 Doc Walker
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 ```
