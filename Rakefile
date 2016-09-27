@@ -171,7 +171,7 @@ namespace :prepare do
   task :release_date do
     cwd = File.expand_path(__dir__)
     file = File.join(cwd, 'src', HEADER_FILE)
-    
+
     contents = IO.read(file)
     contents.sub!(/(\\date\s*)(.*)$/) do |match|
       "#{$1}#{Time.now.strftime('%-d %b %Y')}"
