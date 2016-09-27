@@ -1,4 +1,19 @@
 # encoding: utf-8
+#
+# Copyright:: 2009-2016 Doc Walker
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
 
 require 'git'
 require 'github_changelog_generator/task'
@@ -69,44 +84,44 @@ task :prepare => 'prepare:default'
 
 namespace :prepare do
   task :default => %w(release_date library_properties changelog documentation)
-  
+
   desc 'Prepare documentation'
   task :documentation => :first_time do
     version = Version.current.to_s
-    
+
     # update parameters in Doxyfile
     cwd = File.expand_path(__dir__)
     file = File.join(cwd, 'doc', DOXYFILE)
-    
+
     contents = IO.read(file)
     contents.sub!(/(^PROJECT_NUMBER\s*=)(.*)$/) do |match|
       "#{$1} v#{version}"
     end # contents.sub!(...)
     IO.write(file, contents)
-    
+
     # chdir to doc/ and call doxygen to update documentation
     Dir.chdir(to = File.join(cwd, 'doc'))
     system('doxygen', DOXYFILE)
-    
+
     # chdir to doc/latex and call doxygen to update documentation
     Dir.chdir(from = File.join(cwd, 'doc', 'latex'))
     system('make')
-    
+
     # move/rename file to 'extras/GITHUB_REPO reference-x.y.pdf'
     to = File.join(cwd, 'extras')
     FileUtils.mv(File.join(from, 'refman.pdf'),
       File.join(to, "#{GITHUB_REPO} reference-#{version}.pdf"))
   end # task :documentation
-  
+
   # desc 'Prepare doc/html directory (first-time only)'
   task :first_time do
     cwd = File.expand_path(File.join(__dir__, 'doc', 'html'))
     FileUtils.mkdir_p(cwd)
     Dir.chdir(cwd)
-    
+
     # skip if this operation has already been completed
     next if 'refs/heads/gh-pages' == `git config branch.gh-pages.merge`.chomp
-    
+
     # configure git remote/branch options
     origin = "git@github.com_#{GITHUB_USERNAME}:#{GITHUB_USERNAME}/" +
       "#{GITHUB_REPO}.git"
@@ -164,7 +179,7 @@ namespace :prepare do
     end # contents.sub!(...)
     IO.write(file, contents)
   end # task :release_date
-  
+
 end # namespace :prepare
 
 
@@ -173,21 +188,21 @@ task :release => 'release:default'
 
 namespace :release do
   task :default => %w(source documentation)
-  
+
   desc 'Commit documentation changes related to version bump'
   task :documentation do
     version = Version.current.to_s
     cwd = File.expand_path(File.join(__dir__, 'doc', 'html'))
     g = Git.open(cwd)
-    
+
     # `git add .`
     g.add
-    
+
     # remove each deleted item
     g.status.deleted.each do |item|
       g.remove(item[0])
     end # g.status.deleted.each
-    
+
     # commit changes if items added, changed, or deleted
     if g.status.added.size > 0 || g.status.changed.size > 0 ||
       g.status.deleted.size > 0 then
@@ -196,10 +211,10 @@ namespace :release do
     else
       puts "No changes to commit v#{version}"
     end # if g.status.added.size > 0 || g.status.changed.size > 0...
-    
+
     g.push('origin', 'gh-pages')
   end # task :documentation
-  
+
   desc 'Commit source changes related to version bump'
   task :source do
     version = Version.current.to_s
@@ -216,5 +231,5 @@ namespace :release do
     `git push origin master`
     `git push --tags`
   end # task :source
-  
+
 end # namespace :release

@@ -3,25 +3,24 @@
 /*
 
   i2c_adc_ads7828.h - Arduino library for TI ADS7828 I2C A/D converter
-  
-  This file is part of i2c_adc_ads7828.
-  
-  i2c_adc_ads7828 is free software: you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation, either version 3 of the License, or
-  (at your option) any later version.
-  
-  i2c_adc_ads7828 is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-  
-  You should have received a copy of the GNU General Public License
-  along with i2c_adc_ads7828.  If not, see <http://www.gnu.org/licenses/>.
-  
-  Written by Doc Walker (Rx)
-  Copyright © 2009-2012 Doc Walker <4-20ma at wvfans dot net>
-  
+
+  Library:: i2c_adc_ads7828
+  Author:: Doc Walker <4-20ma@wvfans.net>
+
+  Copyright:: 2009-2016 Doc Walker
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
 */
 
 
@@ -55,6 +54,20 @@
 /// contribute to the discussion and requestors get a more timely response.
 /// \author Doc Walker ([4-20ma@wvfans.net](mailto:4-20ma@wvfans.net))
 /// \copyright 2009-2016 Doc Walker
+/// \par License
+/// <pre>
+/// Licensed under the Apache License, Version 2.0 (the "License");
+/// you may not use this file except in compliance with the License.
+/// You may obtain a copy of the License at
+/// <span>
+///     http://www.apache.org/licenses/LICENSE-2.0
+/// <span>
+/// Unless required by applicable law or agreed to in writing, software
+/// distributed under the License is distributed on an "AS IS" BASIS,
+/// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+/// See the License for the specific language governing permissions and
+/// limitations under the License.
+/// </pre>
 
 
 #ifndef i2c_adc_ads7828_h
@@ -62,11 +75,7 @@
 
 // _________________________________________________________ STANDARD INCLUDES
 // include types & constants of Wiring core API
-#if defined(ARDUINO) && ARDUINO >= 100
 #include "Arduino.h"
-#else
-#include "WProgram.h"
-#endif
 
 
 // __________________________________________________________ PROJECT INCLUDES
@@ -196,9 +205,9 @@ class ADS7828Channel
     uint16_t total();
     uint8_t update();
     uint16_t value();
-    
+
     // ........................................ static public member functions
-    
+
     // ..................................................... public attributes
     /// Maximum value of moving average (defaults to 0x0FFF).
     /// \par Usage:
@@ -211,7 +220,7 @@ class ADS7828Channel
     /// ...
     /// \endcode
     uint16_t maxScale;
-    
+
     /// Minimum value of moving average (defaults to 0x0000).
     /// \par Usage:
     /// \code
@@ -223,31 +232,31 @@ class ADS7828Channel
     /// ...
     /// \endcode
     uint16_t minScale;
-    
+
     // .............................................. static public attributes
-  
+
   private:
     // .............................................. private member functions
-    
+
     // ....................................... static private member functions
-    
+
     // .................................................... private attributes
     /// Command byte for channel object (SD C2 C1 C0 bits only).
     uint8_t commandByte_;
-    
+
     /// Pointer to parent device object.
     ADS7828* device_;
-    
+
     /// Index position within moving average array. 
     uint8_t index_;
-    
+
     /// Array of (unscaled) sample values.
     /// \note Bit shift must match \ref MOVING_AVERAGE_BITS_.
     uint16_t samples_[1 << 4];
-    
+
     /// (Unscaled) running total of moving average array elements.
     uint16_t total_;
-    
+
     // ............................................. static private attributes
     /// Quantity of samples to be averaged =
     ///   2<sup>\ref MOVING_AVERAGE_BITS_</sup>.
@@ -271,44 +280,44 @@ class ADS7828
     uint8_t start(uint8_t);
     uint8_t update(); // single device, all unmasked channel
     uint8_t update(uint8_t); // single device, single channel
-    
+
     // ........................................ static public member functions
     static void begin();
     static ADS7828* device(uint8_t);
     static uint8_t updateAll(); // all devices, all unmasked channels
-    
+
     // ..................................................... public attributes
     /// Each bit position containing a 1 represents a channel that is to be
     /// read via update() / updateAll().
     uint8_t channelMask;                    // mask of active channels
-    
+
     // .............................................. static public attributes
-  
+
   private:
     // .............................................. private member functions
     void init(uint8_t, uint8_t, uint8_t, uint16_t, uint16_t);
     uint16_t read();
-    
+
     // ....................................... static private member functions
     static uint16_t read(uint8_t);
     static uint8_t start(uint8_t, uint8_t);
     static uint8_t update(ADS7828*); // single device, all unmasked channels
     static uint8_t update(ADS7828*, uint8_t); // single device, single channel
-    
+
     // .................................................... private attributes
     /// Device address as defined by pins A1, A0
     uint8_t address_;
-    
+
     /// Array of channel objects.
     ADS7828Channel channels_[8];
-    
+
     /// Command byte for device object (PD1 PD0 bits only).
     uint8_t commandByte_;
-    
+
     // ............................................. static private attributes
     /// Array of pointers to registered device objects.
     static ADS7828* devices_[4];
-    
+
     /// Factory pre-set slave address.
     static const uint8_t BASE_ADDRESS_ = 0x48;
 };
