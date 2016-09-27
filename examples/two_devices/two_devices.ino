@@ -23,7 +23,6 @@
 
 
 #include <i2c_adc_ads7828.h>
-#include <Wire.h>
 
 
 // device 1
