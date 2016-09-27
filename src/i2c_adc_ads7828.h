@@ -26,7 +26,7 @@
 
 /// \mainpage Arduino library for TI ADS7828 I2C A/D converter.
 /// \version \verbinclude VERSION
-/// \date 26 Sep 2016
+/// \date 27 Sep 2016
 /// \par Source Code Repository:
 ///   https://github.com/4-20ma/i2c_adc_ads7828
 /// \par Programming Style Guidelines:

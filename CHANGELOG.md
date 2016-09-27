@@ -1,5 +1,12 @@
 # i2c_adc_ads7828 CHANGELOG
 
+## [v2.0.2](https://github.com/4-20ma/i2c_adc_ads7828/tree/v2.0.2) (2016-09-27)
+[Full Changelog](https://github.com/4-20ma/i2c_adc_ads7828/compare/v2.0.1...v2.0.2)
+
+OTHER
+
+- Fix Rakefile whitespace, update CHANGELOG date [\#24](https://github.com/4-20ma/i2c_adc_ads7828/pull/24) ([4-20ma](https://github.com/4-20ma))
+
 ## [v2.0.1](https://github.com/4-20ma/i2c_adc_ads7828/tree/v2.0.1) (2016-09-27)
 [Full Changelog](https://github.com/4-20ma/i2c_adc_ads7828/compare/v2.0.0...v2.0.1)
 
