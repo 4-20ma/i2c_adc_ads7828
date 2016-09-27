@@ -322,5 +322,5 @@ class ADS7828
     static const uint8_t BASE_ADDRESS_ = 0x48;
 };
 #endif
-/// \example examples/one_device/one_device.pde
-/// \example examples/two_devices/two_devices.pde
+/// \example examples/one_device/one_device.ino
+/// \example examples/two_devices/two_devices.ino
