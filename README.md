@@ -7,39 +7,39 @@
 [Travis]:           https://travis-ci.org/4-20ma/i2c_adc_ads7828
 [license]:          LICENSE
 
+
 ## Overview
-This is an Arduino library for the Texas Instruments ADS7828 12-bit, 8-channel I2C A/D converter. **Updated to support Arduino 1.0.**
+This is an Arduino library for the Texas Instruments ADS7828 12-bit, 8-channel I<sup>2</sup>C A/D converter.
+
 
 ## Features
-The following features have been implemented:
+The following features are available:
 
-  * Up to (4) A/D converters can be used on the same I2C bus (hardware-addressable via pins A0, A1 and software-addressable via ID 0..3)
-  * A/D conversions may be initiated on a bus-, device-, or channel-specific level
-  * Retrieve values as 16-period moving average or last sample
-  * Built-in scaling function to return values in user-defined engineering units
+  - Up to (4) A/D converters can be used on the same I<sup>2</sup>C bus (hardware-addressable via pins A0, A1 and software-addressable via ID 0..3; address 0x48..0x4C)
+  - A/D conversions may be initiated on a bus-, device-, or channel-specific level
+  - Retrieve values as 16-period moving average or last sample
+  - Built-in scaling function to return values in user-defined engineering units
 
-## Hardware
-This library has been tested with an Arduino [Duemilanove](http://www.arduino.cc/en/Main/ArduinoBoardDuemilanove) and a Texas Instruments [ADS7828](http://focus.ti.com/docs/prod/folders/print/ads7828.html) A/D converter.
 
 ## Installation
-* Arduino 17 (or later):
 
-    Determine the location of your sketchbook by selecting _File > Preferences_ from within the Arduino IDE. If you don't already have a _libraries_ folder within your sketchbook, create one and unzip the archive there. See [this](http://arduino.cc/blog/?p=313) for more information.
+#### Library Manager
+Install the library into your Arduino IDE using the Library Manager (available from IDE version 1.6.2). Open the IDE and click Sketch > Include Library > Manage Libraries&hellip;
 
-* Arduino 16 (or earlier):
+Scroll or search for `i2c_adc_ads7828`, then select the version of the library you want to install. Quit/re-launch the IDE to refresh the list; new versions are automatically added to the list, once released on GitHub.
 
-    Download the zip file, extract and copy the _i2c_adc_ads7828_ folder to _ARDUINO\_HOME/hardware/libraries_. If you are upgrading from a previous version, be sure to delete i2c_adc_ads7828.o.
+Refer to Arduino Tutorials > Libraries [Using the Library Manager](https://www.arduino.cc/en/Guide/Libraries#toc3).
 
-## Caveats
-Conforms to Arduino IDE 1.5 Library Specification v2.1 which requires Arduino IDE >= 1.5.
+#### Zip Library
+Refer to Arduino Tutorials > Libraries [Importing a .zip Library](https://www.arduino.cc/en/Guide/Libraries#toc4).
 
-## Support
-Full [source code documentation](http://4-20ma.github.com/i2c_adc_ads7828/) is available. Please report any bugs on the [Issue Tracker](/4-20ma/i2c_adc_ads7828/issues).
+#### Manual
+Refer to Arduino Tutorials > Libraries [Manual Installation](https://www.arduino.cc/en/Guide/Libraries#toc5).
 
-## Questions/Feedback
-I can be contacted at 4-20ma at wvfans dot net.
 
 ## Schematic
+This library has been tested with an Arduino [Duemilanove](http://www.arduino.cc/en/Main/ArduinoBoardDuemilanove) and a Texas Instruments [ADS7828](http://focus.ti.com/docs/prod/folders/print/ads7828.html) A/D converter.
+
 Below is a simplified schematic diagram. Refer to the datasheet for specific requirements.
 
 ```
@@ -70,10 +70,11 @@ Below is a simplified schematic diagram. Refer to the datasheet for specific req
                         GND
 ```
 
-## Example
-The library contains sketches that demonstrates use of the i2c\_adc\_ads7828 library. You can find these in the [examples](/4-20ma/i2c_adc_ads7828/tree/master/examples/) folder.
 
-```c++
+## Example
+The library contains sketches that demonstrates use of the `i2c_adc_ads7828` library. You can find these in the [examples](/4-20ma/i2c_adc_ads7828/tree/master/examples/) folder.
+
+``` cpp
 #include <i2c_adc_ads7828.h>
 #include <Wire.h>
 
@@ -132,6 +133,14 @@ void loop()
   delay(1000);
 }
 ```
+
+
+## Caveats
+Conforms to Arduino IDE 1.5 Library Specification v2.1 which requires Arduino IDE >= 1.5.
+
+
+## Support
+Please [submit an issue](https://github.com/4-20ma/i2c_adc_ads7828/issues) for all questions, bug reports, and feature requests. Email requests will be politely redirected to the issue tracker so others may contribute to the discussion and requestors get a more timely response.
 
 
 ## License & Authors
