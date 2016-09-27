@@ -123,8 +123,7 @@ namespace :prepare do
     next if 'refs/heads/gh-pages' == `git config branch.gh-pages.merge`.chomp
 
     # configure git remote/branch options
-    origin = "git@github.com_#{GITHUB_USERNAME}:#{GITHUB_USERNAME}/" +
-      "#{GITHUB_REPO}.git"
+    origin = "https://github.com/#{GITHUB_USERNAME}/#{GITHUB_REPO}"
     `git init`
     `git remote add origin #{origin}`
     `git checkout --orphan gh-pages`
