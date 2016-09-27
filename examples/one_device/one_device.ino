@@ -1,6 +1,6 @@
 /*
 
-  two_devices.pde - example using i2c_adc_ads7828 library
+  one_device.ino - example using i2c_adc_ads7828 library
 
   Library:: i2c_adc_ads7828
   Author:: Doc Walker <4-20ma@wvfans.net>
@@ -26,16 +26,16 @@
 #include <Wire.h>
 
 
-// device 1
-// Address: A1=0, A0=1
+// device 0
+// Address: A1=0, A0=0
 // Command: SD=1, PD1=1, PD0=1
-ADS7828 device1(1, SINGLE_ENDED | REFERENCE_ON | ADC_ON, 0xFF);
+ADS7828 device(0, SINGLE_ENDED | REFERENCE_ON | ADC_ON, 0x0F);
+ADS7828* adc = &device;
+ADS7828Channel* ambientTemp = adc->channel(0);
+ADS7828Channel* waterTemp = adc->channel(1);
+ADS7828Channel* filterPressure = adc->channel(2);
+ADS7828Channel* waterLevel = adc->channel(3);
 
-// device 2
-// Address: A1=1, A0=0
-// Command: SD=1, PD1=1, PD0=1
-// Scaling: min=0, max=1000
-ADS7828 device2(2, SINGLE_ENDED | REFERENCE_ON | ADC_ON, 0xFF, 0, 1000);
 
 void setup()
 {
@@ -44,53 +44,38 @@ void setup()
 
   // enable I2C communication
   ADS7828::begin();
+
+  // adjust scaling on an individual channel basis
+  ambientTemp->minScale = 0;
+  ambientTemp->maxScale = 150;
+
+  waterTemp->minScale = 0;
+  waterTemp->maxScale = 100;
+
+  filterPressure->minScale = 0;
+  filterPressure->maxScale = 30;
+
+  waterLevel->minScale = 0;
+  waterLevel->maxScale = 100;
 }
 
 
 void loop()
 {
-  uint8_t a, ch;
-
   // update all registered ADS7828 devices/unmasked channels
   ADS7828::updateAll();
 
-  // iterate through device 1..2 channels 0..7
-  for (a = 1; a <= 2; a++)
-  {
-    for (ch = 0; ch < 8; ch++)
-    {
-      serialPrint(ADS7828::device(a)->channel(ch));
-    }
-  }
-  Serial.print("\n");
-
   // output moving average values to console
+  Serial.print("\n Ambient: ");
+  Serial.print(ambientTemp->value(), DEC);
+  Serial.print("\n Water temp: ");
+  Serial.print(waterTemp->value(), DEC);
+  Serial.print("\n Filter pressure: ");
+  Serial.print(filterPressure->value(), DEC);
+  Serial.print("\n Water level: ");
+  Serial.print(waterLevel->value(), DEC);
   Serial.print("\n- - - - - - - - - - - - - - - - - - - - \n");
 
   // delay
   delay(1000);
-}
-
-
-void serialPrint(ADS7828Channel* ch)
-{
-  // device address (0..3)
-  Serial.print("\nAD:");
-  Serial.print(ch->device()->address(), DEC);
-
-  // channel ID (0..7)
-  Serial.print(", CH:");
-  Serial.print(ch->id(), DEC);
-
-  // moving average value (scaled)
-  Serial.print(", v:");
-  Serial.print(ch->value(), DEC);
-
-  // minimum scale applied to moving average value
-  Serial.print(", mn:");
-  Serial.print(ch->minScale, DEC);
-
-  // maximum scale applied to moving average value
-  Serial.print(", mx:");
-  Serial.print(ch->maxScale, DEC);
 }
