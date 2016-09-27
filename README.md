@@ -72,7 +72,7 @@ Below is a simplified schematic diagram. Refer to the datasheet for specific req
 
 
 ## Example
-The library contains sketches that demonstrates use of the `i2c_adc_ads7828` library. You can find these in the [examples](/4-20ma/i2c_adc_ads7828/tree/master/examples/) folder.
+The library contains sketches that demonstrates use of the `i2c_adc_ads7828` library. You can find these in the [examples](/examples/) folder.
 
 ``` cpp
 #include <i2c_adc_ads7828.h>
