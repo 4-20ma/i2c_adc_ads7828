@@ -1,6 +1,6 @@
 # i2c_adc_ads7828 CHANGELOG
 
-## [v2.0.1](https://github.com/4-20ma/i2c_adc_ads7828/tree/v2.0.1) (2016-09-26)
+## [v2.0.1](https://github.com/4-20ma/i2c_adc_ads7828/tree/v2.0.1) (2016-09-27)
 [Full Changelog](https://github.com/4-20ma/i2c_adc_ads7828/compare/v2.0.0...v2.0.1)
 
 BUG FIXES
