@@ -44,34 +44,7 @@ This library has been tested with an Arduino [Duemilanove](http://www.arduino.cc
 
 Below is a simplified schematic diagram. Refer to the datasheet for specific requirements.
 
-```
-                               Arduino
-                              .--------------------.
-                              |Duemilanove         |
-                              |                    |
-   TI ADS7828        .-------o|5V                  |
-  .--------------.   |        |                    |
--o|1 CH0   VDD 16|o--'   .---o|GND                 |
-  |              |       |    |                    |
--o|2 CH1   SDA 15|o------)---o|A4 SDA              |
-  |              |       |    |                    |
--o|3 CH2   SCL 14|o------)---o|A5 SCL              |
-  |              |       |    '--------------------'
--o|4 CH3    A1 13|o------o
-  |              |       |
--o|5 CH4    A0 12|o------o
-  |              |       |
--o|6 CH5   COM 11|o-     |
-  |              |       |
--o|7 CH6   REF 10|o-     |
-  |              |       |
--o|8 CH7   GND  9|o------o
-  '--------------'       |
-                         |
-                        ===
-                        GND
-```
-
+![Figure 1 - Schematic Diagram](SCHEMATIC.svg)
 
 ## Example
 The library contains sketches that demonstrates use of the `i2c_adc_ads7828` library. You can find these in the [examples](/examples/) folder.
@@ -149,7 +122,7 @@ Please [submit an issue](https://github.com/4-20ma/i2c_adc_ads7828/issues) for a
 - Author:: Doc Walker ([4-20ma@wvfans.net](mailto:4-20ma@wvfans.net))
 
 ```
-Copyright:: 2009-2016 Doc Walker
+Copyright:: 2009-2019 Doc Walker
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
